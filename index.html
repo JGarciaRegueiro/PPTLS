@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Piedra, papel, tijera, lagarto, spock</title>
+        <link rel="stylesheet" href="css/styles.css">
+        <script src="script/js.js"></script>
+    </head>
+    <body>
+        <header>
+            <input type="text" id="nombre" placeholder="Introduce tu nombre">
+            <button onclick="jugar()">Jugar!</button>
+        </header>
+        <main>
+            <section>
+                <div>
+                    <h1>Nombre jugador</h1>
+                    <p id="nombreJugador"></p>   
+                </div>
+                <div>
+                    <h1>Oponente</h1>
+                    <p>IA</p>  
+                </div>
+            </section>
+            <section>
+                <img id="eleccionJugador">
+                <img src="img/versus.png" alt="versus">
+                <img id="eleccionOponente">
+            </section>
+            <section>
+                <h1>Resultado</h1>
+                <p id="resultado"></p>
+            </section>
+            <section>
+                <h1>Elige una opción</h1>
+                <div>
+                    <img onclick="eleccionJugador(this)" id="piedra" class="select__image" src="img/piedra.png" alt="Icono piedra">
+                    <img onclick="eleccionJugador(this)" id="papel" class="select__image" src="img/papel.png" alt="Icono papel">
+                    <img onclick="eleccionJugador(this)" id="tijeras" class="select__image" src="img/tijeras.png" alt="Icono tijeras">
+                    <img onclick="eleccionJugador(this)" id="lagarto" class="select__image" src="img/lagarto.png" alt="Icono lagarto">
+                    <img onclick="eleccionJugador(this)" id="spock" class="select__image" src="img/spock.png" alt="Icono spock">
+                </div>
+            </section>
+        </main>
+        <footer>    
+            <p>Site desarrollado por Diego, Alberto & Jorge García.</p>
+            <p>Todos los derechos reservados</p>
+        </footer>
+    </body>
+</html>

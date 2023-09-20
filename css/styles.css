@@ -1,0 +1,29 @@
+:root {
+    --blanco: #ffffff;
+    --oscuro: #212121;
+    --primario: #ffc107;
+    --secundario: #0097a7;
+    --gris: #757575;
+    --grisClaro: #dfe9f3;
+    font-family: 'Krub', sans-serif;
+}
+
+/* Globales */
+html {
+    box-sizing: border-box; /* Hack para que las cajas ocupan el espacio definido teniendo en cuenta los padding, margin, etc...*/
+    font-size: 62.5%; /* Lo usamos para igualar 1rem a 10px*/
+}
+
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+
+img {
+    height: 100px;
+    width: 100px;
+    opacity: 0.2;
+}
+
+.select__image:hover {
+    opacity: 1;
+}
