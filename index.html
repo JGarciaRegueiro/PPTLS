@@ -14,26 +14,30 @@
             <button onclick="jugar()">Jugar!</button>
         </header>
         <main>
-            <section>
+            <section class="estadisticas">
                 <div>
-                    <h1>Nombre jugador</h1>
-                    <p id="nombreJugador"></p>   
+                    <h1>Jugador</h1>
+                    <p id="nombreJugador">Jugador1</p>   
+                </div>
+                <div class="contador">
+                    <span id="puntuacionJugador">0</span>
+                    <span>-</span>
+                    <span id="puntuacionOponente">0</span>
                 </div>
                 <div>
                     <h1>Oponente</h1>
                     <p>IA</p>  
                 </div>
             </section>
-            <section>
+            <section class="match">
                 <img id="eleccionJugador">
-                <img src="img/versus.png" alt="versus">
+                <img class="versus" src="img/versus.png" alt="versus">
                 <img id="eleccionOponente">
             </section>
-            <section>
-                <h1>Resultado</h1>
-                <p id="resultado"></p>
+            <section class="resultado">
+                <h1 id="resultado"></h1>
             </section>
-            <section>
+            <section class="eleccionJugador">
                 <h1>Elige una opción</h1>
                 <div>
                     <img onclick="eleccionJugador(this)" id="piedra" class="select__image" src="img/piedra.png" alt="Icono piedra">
@@ -45,8 +49,7 @@
             </section>
         </main>
         <footer>    
-            <p>Site desarrollado por Diego, Alberto & Jorge García.</p>
-            <p>Todos los derechos reservados</p>
+            <p>Desarrollado por Diego, Alberto & Jorge García.</p>
         </footer>
     </body>
 </html>

@@ -1,8 +1,8 @@
 :root {
     --blanco: #ffffff;
     --oscuro: #212121;
-    --primario: #ffc107;
-    --secundario: #0097a7;
+    --primario: #ffd454;
+    --secundario: #87ebf7;
     --gris: #757575;
     --grisClaro: #dfe9f3;
     font-family: 'Krub', sans-serif;
@@ -18,12 +18,78 @@ html {
     box-sizing: inherit;
 }
 
+body {
+    background-color: var(--secundario);
+}
+
+main {
+
+}
+
+section {
+    padding: 50px;
+}
+
 img {
     height: 100px;
     width: 100px;
     opacity: 0.2;
+    border: 5px solid;
+    border-color: #212121;
+}
+
+.select__image {
+    background-color: var(--primario);
 }
 
 .select__image:hover {
     opacity: 1;
+}
+
+header {
+    display: flex;
+    justify-content: center;
+    padding-top: 50px ;
+}
+
+.estadisticas {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.contador {
+    font-size: 100px;
+}
+
+.match {
+    display: flex;
+    justify-content: center;
+}
+
+.match img {
+    height: 300px;
+    width: 300px;
+}
+
+.versus {
+    border:none;
+}
+
+.resultado {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.eleccionJugador{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
