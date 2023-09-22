@@ -8,8 +8,17 @@ function jugar(){
 }
 
 function eleccionJugador(img){
+    var imagenes = document.getElementsByClassName("select__image");
+    for(let i=0; i<imagenes.length; i++){
+        imagenes[i].style.opacity="0.2";
+    }
+    var imagenes2 = document.getElementsByClassName("select__image2");
+    for(let i=0; i<imagenes2.length; i++){
+        imagenes2[i].style.opacity="0.2";
+    }
     var eleccionJugador = document.getElementById("eleccionJugador");
     eleccionJugador.src = img.src;
+    img.style.opacity="1";
     var eleccion = eleccionOponente();
     resultado(img, eleccion);
     contador();
@@ -18,12 +27,15 @@ function eleccionJugador(img){
 function eleccionOponente(){
     var eleccionOponente = document.getElementById("eleccionOponente");
     var opciones = ["piedra","papel","tijeras","lagarto","spock"];
-    var eleccion = opciones[getRandomInt(0,4)];
+    var eleccion = opciones[getRandomInt(0,5)];
     eleccionOponente.src = document.getElementById(eleccion).src;
+    document.getElementById(eleccion+"Op").style.opacity = "1";
     return eleccion;
 }
 
 function getRandomInt(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
     return Math.floor(Math.random() * (max - min) + min);
 }
 

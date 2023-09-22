@@ -1,17 +1,12 @@
 :root {
-    --blanco: #ffffff;
-    --oscuro: #212121;
-    --primario: #ffd454;
-    --secundario: #87ebf7;
-    --gris: #757575;
-    --grisClaro: #dfe9f3;
+    --oponente: #f17b7b;
+    --jugador: #ffd454;
+    --fondo: #87ebf7;
     font-family: 'Krub', sans-serif;
 }
 
-/* Globales */
 html {
-    box-sizing: border-box; /* Hack para que las cajas ocupan el espacio definido teniendo en cuenta los padding, margin, etc...*/
-    font-size: 62.5%; /* Lo usamos para igualar 1rem a 10px*/
+    box-sizing: border-box;
 }
 
 *, *:before, *:after {
@@ -19,7 +14,7 @@ html {
 }
 
 body {
-    background-color: var(--secundario);
+    background-color: var(--fondo);
 }
 
 main {
@@ -39,7 +34,11 @@ img {
 }
 
 .select__image {
-    background-color: var(--primario);
+    background-color: var(--jugador);
+}
+
+.select__image2 {
+    background-color: var(--oponente);
 }
 
 .select__image:hover {
@@ -64,28 +63,42 @@ header {
 
 .match {
     display: flex;
-    justify-content: center;
-}
-
-.match img {
-    height: 300px;
-    width: 300px;
+    justify-content: space-evenly;
+    align-items: center;
 }
 
 .versus {
     border:none;
+    opacity: 1;
+    margin: 40px;
+}
+
+.selectorJugador, .selectorOponente {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+#eleccionJugador, #eleccionOponente {
+    height: 300px;
+    width: 300px;
+    opacity: 1;
+}
+
+.decisionFinal {
+    display: flex;
+    align-items: center;
 }
 
 .resultado {
     display: flex;
     flex-direction: column;
     align-items: center;
+    font-size: 30px;
 }
 
-.eleccionJugador{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+#resultado {
+    text-transform: uppercase;
 }
 
 footer {
