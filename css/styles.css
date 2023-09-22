@@ -18,7 +18,8 @@ body {
 }
 
 main {
-
+    pointer-events: none;
+    opacity: 0.2;
 }
 
 section {
@@ -30,6 +31,7 @@ img {
     width: 100px;
     opacity: 0.2;
     border: 5px solid;
+    border-radius: 10px;
     border-color: #212121;
 }
 
@@ -43,12 +45,19 @@ img {
 
 .select__image:hover {
     opacity: 1;
+    cursor: pointer;
 }
 
 header {
     display: flex;
+    gap: 10px;
     justify-content: center;
-    padding-top: 50px ;
+    padding-top: 50px;
+}
+
+header input {
+    padding: 10px;
+    border-radius: 5px;
 }
 
 .estadisticas {

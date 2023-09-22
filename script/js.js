@@ -1,10 +1,13 @@
-function jugar(){
-    var nombre = document.getElementById("nombre");
-    var nombreJugador = document.getElementById("nombreJugador");
-    nombreJugador.textContent = nombre.value;
-
-    var main = document.getElementsByTagName("main");
-    main.style.cssText ="pointer-events: none;";
+function jugar() {
+    if (validar()) {
+        var main = document.querySelector("main");
+        main.style.pointerEvents="auto";
+        main.style.opacity=1;
+        var nombre = document.getElementById("nombre");
+        var nombreJugador = document.getElementById("nombreJugador");
+        nombreJugador.textContent = nombre.value;
+        reset();
+    }
 }
 
 function eleccionJugador(img){
@@ -136,7 +139,6 @@ function resultado(img, eleccionOponente){
         }
         contador(resultado.textContent);
     }
-
 }
 
 function contador(resultado) {
@@ -150,3 +152,28 @@ function contador(resultado) {
     }
 }
 
+function validar() {
+    if (nombre.value.trim() == ''){
+        alert("El nombre es obligatorio");
+        return false;
+    } else return true;
+}
+
+function reset() {
+    document.getElementById("nombre").value="";
+    var puntuacionJugador = document.getElementById("puntuacionJugador");
+    var puntuacionOponente = document.getElementById("puntuacionOponente");
+    var resultado = document.getElementById("resultado");
+    puntuacionJugador.textContent = 0;
+    puntuacionOponente.textContent = 0;
+    resultado.textContent="";
+    var imagenes = document.getElementsByClassName("select__image");
+    for(let i=0; i<imagenes.length; i++){
+        imagenes[i].style.opacity="0.2";
+    }
+    var imagenes2 = document.getElementsByClassName("select__image2");
+    for(let i=0; i<imagenes2.length; i++){
+        imagenes2[i].style.opacity="0.2";
+    }
+    
+}
