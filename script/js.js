@@ -64,6 +64,7 @@ function resultado(img, eleccionOponente){
         contador(resultado.textContent);
     }
 
+    
     if (img.id == "papel"){
         if (eleccionOponente == "piedra"){
             resultado.textContent="ganaste";
