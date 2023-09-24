@@ -1,117 +1,54 @@
-:root {
-    --oponente: #f17b7b;
-    --jugador: #ffd454;
-    --fondo: #87ebf7;
-    font-family: 'Krub', sans-serif;
+body{
+    background-color: white;
 }
+header{
+    margin: 0px 10%;
 
-html {
-    box-sizing: border-box;
-}
-
-*, *:before, *:after {
-    box-sizing: inherit;
-}
-
-body {
-    background-color: var(--fondo);
-}
-
-main {
-    pointer-events: none;
-    opacity: 0.2;
-}
-
-section {
-    padding: 50px;
-}
-
-img {
-    height: 100px;
-    width: 100px;
-    opacity: 0.2;
-    border: 5px solid;
-    border-radius: 10px;
-    border-color: #212121;
-}
-
-.select__image {
-    background-color: var(--jugador);
-}
-
-.select__image2 {
-    background-color: var(--oponente);
-}
-
-.select__image:hover {
-    opacity: 1;
-    cursor: pointer;
-}
-
-header {
+    font-size: 20px;
+    margin-top: 50px;
+    margin-bottom: 25px;
     display: flex;
-    gap: 10px;
-    justify-content: center;
-    padding-top: 50px;
+    gap: 30px;
+    
 }
 
-header input {
-    padding: 10px;
-    border-radius: 5px;
+h1{
+    font-size: 150px;
 }
 
-.estadisticas {
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-}
-
-.contador {
+h2{
     font-size: 100px;
 }
 
-.match {
+.display-center{
     display: flex;
-    justify-content: space-evenly;
+    justify-content: center;
     align-items: center;
+    text-align: center;
+    gap: 150px;
 }
 
-.versus {
-    border:none;
-    opacity: 1;
-    margin: 40px;
+.game-content{
+    margin-bottom: 50px;
+    margin-top: -100px;
 }
 
-.selectorJugador, .selectorOponente {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
+.score-content{
+    padding-top: 70px;
 }
 
-#eleccionJugador, #eleccionOponente {
-    height: 300px;
-    width: 300px;
-    opacity: 1;
+.player-options-content{
+    gap: 25px;    
 }
 
-.decisionFinal {
-    display: flex;
-    align-items: center;
+.rounded{
+    border-radius: 50%;
 }
 
-.resultado {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    font-size: 30px;
+.big-image{
+    width: 250px;
 }
 
-#resultado {
-    text-transform: uppercase;
-}
-
-footer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+.small-image{
+    width: 100px;
 }
