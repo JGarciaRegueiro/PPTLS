@@ -1,0 +1,111 @@
+
+.visu {
+    width: 50vw;
+    background-color:lightslategray;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.visu div{
+    display: flex;
+    flex-direction: row;
+    gap: 1px;
+}
+
+.visu p{
+    font-size: 50px;
+}
+.visu label{
+    font-size: 50px;
+}
+.imagen-visu{
+    width: 200px;
+    height: 200px;
+}
+.principal{
+    display:flex;
+    flex-direction: row;
+    background-color: aqua;
+    height: 100vh;
+}
+.botones{
+    width: 25vw;
+    background-color:lightgray;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+}
+
+.btn{
+    background-color: transparent;
+    border: none;
+}
+
+.btn img{
+    width: 100px;
+    height: 100px;
+}
+
+.btn :hover {
+    width: 110px;
+    height: 110px;
+}
+
+.botones button{
+    width: 100px;
+    height: 100px;
+
+}
+
+/* Estilos para el modal victoria */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+  }
+  
+  .modal-content {
+    background-color: #fff;
+    margin: 25% auto;
+    padding: 20px;
+    text-align: center;
+    border-radius: 5px;
+  }
+  
+  /* Estilos para el botón de reinicio */
+  #restartButton {
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+
+  /* Estilos para el modal victoria */
+.modal-inicial {
+    display: block;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+  }
+
+  /* Estilos para el botón de reinicio */
+  #jugar-button {
+    background-color:#4CAF50;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+  }

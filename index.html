@@ -1,61 +1,85 @@
 <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Piedra, papel, tijera, lagarto, spock</title>
-        <link rel="stylesheet" href="css/styles.css">
-        <script src="script/js.js"></script>
-    </head>
-    <body>
-        <header>
-            <input type="text" id="nombre" placeholder="Introduce tu nombre">
-            <input onclick="jugar()" type="submit" value="Jugar!">
-        </header>
-        <main>
-            <section class="estadisticas">
-                <div>
-                    <h1>Jugador</h1>
-                    <p id="nombreJugador">Jugador1</p>   
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Juego de Piedra, Papel, Tijeras, lagarto, Spock</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="scripts.js"></script>
+</head>
+<body>
+    <header>
+                <label for="nombre">Introduce tu nombre:</label>
+                <input type="text" name="nombre-input" id="nombre">
+                <button type="button" id="jugar-button" onclick="getNombre()">Jugar</button>
+    </header>
+    <main class="principal">
+        <aside class="botones">
+            <div>
+                <p>Tú:</p>
+                <label id="nombre-jugador">Inserte su nombre </label>
+            </div>
+
+            <button class="btn" onclick="jugar(0)"><img src="images/piedra.png" width="50px"></button>
+            <button class="btn" onclick="jugar(1)"><img src="images/papel.png" width="50px"></button>
+            <button class="btn" onclick="jugar(2)"><img src="images/tijeras.png" width="50px"></button>
+            <button class="btn" onclick="jugar(3)"><img src="images/lagarto.png" width="50px"></button>
+            <button class="btn" onclick="jugar(4)"><img src="images/spoke.png" width="50px"></button>
+
+        </aside>
+
+        <section class="visu">
+
+            <div>
+                    <label id= "marcador-jugador">0</Label>
+                    <label id= "barra">/</Label>
+                    <label id="marcador-ordenador">0</label>
+            </div>
+            
+            <div>
+                <img class="imagen-visu" src="images/blanco.png" id="imagen-visu-jugador" alt="">
+                <img class="imagen-visu" src="images/vs.png" alt="">
+                <img class="imagen-visu" src="images/blanco.png" id="imagen-visu-ordenador" alt="">
+            </div>
+
+            <div>
+                <label id="resultado">aqui va el resultado</label>
+            </div>
+            
+        </section>
+
+        <aside class="botones">
+
+            <div>
+                <p>Ordenador</p>
+            </div>
+
+            <button class="btn"><img src="images/piedra.png" width="50px"></button>
+            <button class="btn"><img src="images/papel.png" width="50px"></button>
+            <button class="btn"><img src="images/tijeras.png" width="50px"></button>
+            <button class="btn"><img src="images/lagarto.png" width="50px"></button>
+            <button class="btn"><img src="images/spoke.png" width="50px"></button>
+
+        </aside>
+
+        <div id="popup" class="modal">
+                <div class="modal-content">
+                <label id="texto-popup"></label>
+                <button id="restartButton" onclick="reiniciarJuego()">Reiniciar</button>
                 </div>
-                <div class="contador">
-                    <span id="puntuacionJugador">0</span>
-                    <span>-</span>
-                    <span id="puntuacionOponente">0</span>
-                </div>
-                <div>
-                    <h1>Oponente</h1>
-                    <p>IA</p>  
-                </div>
-            </section>
-            <section class="match">
-                <div class="selectorJugador">
-                    <img onclick="eleccionJugador(this)" id="piedra" class="select__image" src="img/piedra.png" alt="Icono piedra">
-                    <img onclick="eleccionJugador(this)" id="papel" class="select__image" src="img/papel.png" alt="Icono papel">
-                    <img onclick="eleccionJugador(this)" id="tijeras" class="select__image" src="img/tijeras.png" alt="Icono tijeras">
-                    <img onclick="eleccionJugador(this)" id="lagarto" class="select__image" src="img/lagarto.png" alt="Icono lagarto">
-                    <img onclick="eleccionJugador(this)" id="spock" class="select__image" src="img/spock.png" alt="Icono spock">
-                </div>
-                <div class="decisionFinal">
-                    <img id="eleccionJugador">
-                    <img class="versus" src="img/versus.png" alt="versus">
-                    <img id="eleccionOponente">    
-                </div>
-                <div class="selectorOponente">
-                    <img id="piedraOp" class="select__image2" src="img/piedra.png" alt="Icono piedra">
-                    <img id="papelOp" class="select__image2" src="img/papel.png" alt="Icono papel">
-                    <img id="tijerasOp" class="select__image2" src="img/tijeras.png" alt="Icono tijeras">
-                    <img id="lagartoOp" class="select__image2" src="img/lagarto.png" alt="Icono lagarto">
-                    <img id="spockOp" class="select__image2" src="img/spock.png" alt="Icono spock">
-                </div>                
-            </section>
-            <section class="resultado">
-                <h1 id="resultado"></h1>
-            </section>
-        </main>
-        <footer>    
-            <p>Desarrollado por Diego, Pablo & Jorge García.</p>
-        </footer>
-    </body>
+        </div>
+
+        <div id="popup-inicial" class="modal-inicial">
+            <div class="modal-content">
+                <label for="nombre">Introduce tu nombre:</label>
+                <input type="text" name="nombre-input" id="nombre">
+                <button type="button" id="jugar-button" onclick="getNombre()">Jugar</button>
+            </div>
+    </div>
+
+    </main>
+
+    
+</body>
 </html>
