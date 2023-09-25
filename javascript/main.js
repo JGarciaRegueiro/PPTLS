@@ -1,6 +1,13 @@
+//Clases
+class GameOption{
+    constructor(option, win, source){
+        this.option = option;
+        this.win = win;              
+        this.source = source;  
+    }
+}
 
 //Atributos
-
 let playerNameChoose, iaDifficult, buttonPlay; 
 
 let playerName, enemyName;
@@ -8,6 +15,8 @@ let playerChoice, enemyChoice;
 
 let scorePlayer, scoreEnemy;
 let scoreText, gameStatus;
+
+let getEnemyElection;
 
 let bRock, bPaper, bScissor, bLizard, bSpock;
 
@@ -17,10 +26,36 @@ const srcPaper = "../imgs/Paper.jpg";
 const srcScissor = "../imgs/Scissor.jpg";
 const srcLizard = "../imgs/Lizard.jpg";
 const srcSpock = "../imgs/Spock.jpg";
+
+const rock = new GameOption("rock", ["scissor", "lizard"], srcRock);
+const paper = new GameOption("paper", ["rock", "spock"], srcPaper);
+const scissor = new GameOption("scissor", ["paper", "lizard"], srcScissor);
+const lizard = new GameOption("lizard", ["spock", "paper"], srcLizard);
+const spock = new GameOption("spock", ["rock", "paper"], srcSpock);
 //-------------------------------------------
 //Main code
+function compareElections(playerOption, enemyOption){    
+    let aux = "";
+    let strEnemy = enemyOption.option;
 
+    console.log(playerOption.option + " vs " + enemyOption.option);
 
+    if(playerOption.option == strEnemy){
+        aux = "You have tied...";        
+    }
+        
+    else if(playerOption.win[0] == strEnemy || playerOption.win[1] == strEnemy){
+        aux = "You won!!!";
+        scorePlayer++;
+    }        
+    else{
+        aux = "You lose...";
+        scoreEnemy++;
+    }
+
+    console.log(">" + aux);
+    drawGameStatus(aux);
+}
 
 //-------------------------------------------
 // Functions
@@ -51,6 +86,12 @@ function init(){
     bScissor = document.getElementById("option_scissor");
     bLizard = document.getElementById("option_lizard");
     bSpock = document.getElementById("option_spock");
+
+    bRock.addEventListener("click", () => handleMyOption(rock));
+    bPaper.addEventListener("click", () => handleMyOption(paper));
+    bScissor.addEventListener("click", () => handleMyOption(scissor));
+    bLizard.addEventListener("click", () => handleMyOption(lizard));
+    bSpock.addEventListener("click", () => handleMyOption(spock));
 }
 
 function addEvents(){
@@ -60,41 +101,71 @@ function addEvents(){
     });
 }
 
-function addPlayEvents(){
-    bRock.addEventListener("click", () => handleOptions(srcRock));
-    bPaper.addEventListener("click", () => handleOptions(srcPaper));
-    bScissor.addEventListener("click", () => handleOptions(srcScissor));
-    bLizard.addEventListener("click", () => handleOptions(srcLizard));
-    bSpock.addEventListener("click", () => handleOptions(srcSpock));
-}
-
 function start(){
-    console.log("Loading game...");
-    addPlayEvents();
-
+    console.log("Loading game...");    
     
-    playerName = playerNameChoose.value;
+    playerName.innerHTML = playerNameChoose.value;
     enemyName.innerHTML = iaDifficult.value;
 
     scorePlayer = 0;
     scoreEnemy = 0;
+
+    console.log("Enemy level = " + iaDifficult.value);
+    getEnemyElection = getEnemyIAFunctionality();
+
+    drawGameStatus("Waiting...");
+
+    console.log("GAME START!");    
 }
 
-function handleOptions(src){
-    console.log("You choose " + src);
-    playerChoice.src = src;
+function drawGameStatus(status){    
+    gameStatus.innerHTML = status;
+    scoreText.innerHTML = scorePlayer + " - " + scoreEnemy;
+}
 
-   // enemyChoice.src = 
+function battle(electionPlayer, electionEnemy){
+    playerChoice.src = electionPlayer.source;
+    enemyChoice.src = electionEnemy.source;
+    compareElections(electionPlayer, electionEnemy);    
+}
+//-------------------------------------------
+//Your functions
+function handleMyOption(election){
+    console.log("You choose " + election.option);    
+    let e = getEnemyElection();
+    battle(election, e);
 }
 
 //-------------------------------------------
 //Enemy functions
-function getRandomOption(){
-    //let argOptions = []
-
-    return Math.floor(Math.random() * 3) + 1;
+function getEnemyIAFunctionality(){
+    
+    switch(iaDifficult.value.toLowerCase){        
+        default:
+            return getEnemyElectionNormal;
+    }
+    
 }
 
+function getEnemyElectionNormal(){
+    return translateNumberIntoClass(getRandomOption(5));
+}
+
+
+function getRandomOption(max){
+    return Math.floor(Math.random() * max) + 1;
+}
+
+function translateNumberIntoClass(number){    
+    switch(number){
+        case 1: return rock;
+        case 2: return paper;
+        case 3: return scissor;
+        case 4: return lizard;
+        case 5: return spock;
+        default: return null;
+    }
+}
 //-------------------------------------------
 //Global events
 window.onload = function(){
