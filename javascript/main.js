@@ -114,6 +114,7 @@ function start(){
     getEnemyElection = getEnemyIAFunctionality();
 
     drawGameStatus("Waiting...");
+    document.querySelector("main").style.opacity = 1;
 
     console.log("GAME START!");    
 }
@@ -171,4 +172,6 @@ function translateNumberIntoClass(number){
 window.onload = function(){
     init();
     addEvents();
+
+    document.querySelector("main").style.opacity = .1;
 }
