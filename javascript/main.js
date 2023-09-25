@@ -8,6 +8,8 @@ class GameOption{
 }
 
 //Atributos
+let firsTime = true;
+
 let playerNameChoose, iaDifficult, buttonPlay; 
 
 let playerName, enemyName;
@@ -87,11 +89,7 @@ function init(){
     bLizard = document.getElementById("option_lizard");
     bSpock = document.getElementById("option_spock");
 
-    bRock.addEventListener("click", () => handleMyOption(rock));
-    bPaper.addEventListener("click", () => handleMyOption(paper));
-    bScissor.addEventListener("click", () => handleMyOption(scissor));
-    bLizard.addEventListener("click", () => handleMyOption(lizard));
-    bSpock.addEventListener("click", () => handleMyOption(spock));
+    
 }
 
 function addEvents(){
@@ -101,22 +99,57 @@ function addEvents(){
     });
 }
 
-function start(){
-    console.log("Loading game...");    
+function initPlayerOptions(target, myClass){
+    target.addEventListener("click", () => handleMyOption(myClass));
+
+    target.addEventListener("click", () => handleMyOption(myClass));
     
-    playerName.innerHTML = playerNameChoose.value;
-    enemyName.innerHTML = iaDifficult.value;
+    let re = target.style.backgroundColor;
+    target.addEventListener("mouseenter", () => target.style.backgroundColor = "yellow");
+    target.addEventListener("mouseleave", () => target.style.backgroundColor = re);
+}
 
-    scorePlayer = 0;
-    scoreEnemy = 0;
+function start(){
 
-    console.log("Enemy level = " + iaDifficult.value);
-    getEnemyElection = getEnemyIAFunctionality();
+    if(playerNameChoose.value == "")
+        alert("Not name available");
+    else{
+        console.log("Loading game...");    
+    
+        playerName.innerHTML = playerNameChoose.value;
+        enemyName.innerHTML = iaDifficult.value;
+    
+        playerChoice.src = srcEmpty;
+        enemyChoice.src = srcEmpty;
 
-    drawGameStatus("Waiting...");
-    document.querySelector("main").style.opacity = 1;
+        scorePlayer = 0;
+        scoreEnemy = 0;
+    
+        console.log("Enemy level = " + iaDifficult.value);
+        getEnemyElection = getEnemyIAFunctionality();
+    
+        drawGameStatus("Waiting...");
+        document.querySelector("main").style.opacity = 1;
+    
+        console.log("GAME START!");   
 
-    console.log("GAME START!");    
+        if(firsTime){
+            initPlayerOptions(bRock, rock);            
+            initPlayerOptions(bPaper, paper);
+            initPlayerOptions(bScissor, scissor);
+            initPlayerOptions(bLizard, lizard);
+            initPlayerOptions(bSpock, spock);
+            /*
+            bRock.addEventListener("click", () => handleMyOption(rock));
+            bPaper.addEventListener("click", () => handleMyOption(paper));
+            bScissor.addEventListener("click", () => handleMyOption(scissor));
+            bLizard.addEventListener("click", () => handleMyOption(lizard));
+            bSpock.addEventListener("click", () => handleMyOption(spock));
+            */
+            firsTime =false;
+        }
+       
+    }
 }
 
 function drawGameStatus(status){    
@@ -132,7 +165,7 @@ function battle(electionPlayer, electionEnemy){
 //-------------------------------------------
 //Your functions
 function handleMyOption(election){
-    console.log("You choose " + election.option);    
+       
     let e = getEnemyElection();
     battle(election, e);
 }
@@ -140,10 +173,18 @@ function handleMyOption(election){
 //-------------------------------------------
 //Enemy functions
 function getEnemyIAFunctionality(){
-    
-    switch(iaDifficult.value.toLowerCase){        
+    console.log("You choose " + iaDifficult.value); 
+
+    switch(iaDifficult.value.toLowerCase){    
+        case "normal": getEnemyElectionNormal();
+            break;
+        case "classic": getEnemyElectionClassic();
+            break;  
+        case "spock": getEnemyElectionSpock();
+            break;  
+        case "intelligent": getEnemyElectionIntelligent();
         default:
-            return getEnemyElectionNormal;
+            return null;
     }
     
 }
@@ -151,7 +192,16 @@ function getEnemyIAFunctionality(){
 function getEnemyElectionNormal(){
     return translateNumberIntoClass(getRandomOption(5));
 }
-
+function getEnemyElectionSpock(){
+    translateNumberIntoClass(5);
+}
+function getEnemyElectionClassic(){
+    return translateNumberIntoClass(getRandomOption(3));
+}
+function getEnemyElectionIntelligent(){
+    
+    return null;
+}
 
 function getRandomOption(max){
     return Math.floor(Math.random() * max) + 1;
