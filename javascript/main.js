@@ -20,7 +20,7 @@ const scissor = new GameOption("scissor", ["paper", "lizard"], srcScissor);
 const lizard = new GameOption("lizard", ["spock", "paper"], srcLizard);
 const spock = new GameOption("spock", ["rock", "paper"], srcSpock);
 
-
+const defaultOpacitySelectButtons = '.5';
 //Referencias
 let playerNameChoose, iaDifficult, buttonPlay; 
 
@@ -30,7 +30,6 @@ let playerChoice, enemyChoice;
 let scoreText, gameStatus;
 let bRock, bPaper, bScissor, bLizard, bSpock;
 let ebRock, ebPaper, ebScissor, ebLizard, ebSpock;
-
 //Atributos
 let firsTime = true;
 
@@ -42,7 +41,7 @@ let enemyElections;
 let getEnemyElection;
 
 
-let shinyPlayerButton;
+let shinyPlayerButton, shinyEnemyButton;
 
 //-------------------------------------------
 //Main code
@@ -105,6 +104,12 @@ function init(){
     bScissor = document.getElementById("p_scissor");
     bLizard = document.getElementById("p_lizard");
     bSpock = document.getElementById("p_spock");
+
+    ebRock = document.getElementById("e_rock");
+    ebPaper = document.getElementById("e_paper");
+    ebScissor = document.getElementById("e_scissor");
+    ebLizard = document.getElementById("e_lizard");
+    ebSpock = document.getElementById("e_spock");
 }
 
 function addEvents(){
@@ -116,15 +121,15 @@ function addEvents(){
 
 function initPlayerOptions(target, myClass){
     //border: solid 2px black;
-    let opacity = '.5';
+    let opacity = defaultOpacitySelectButtons;
 
     //target.style.backgroundColor = 'white';
     //let revertColor = target.style.backgroundColor;
     //target.addEventListener("click", () => setButtonShiny(target, revertColor));    
 
-    target.style.opacity = opacity;
+    
     target.addEventListener("click", () => handleMyOption(myClass));    
-    target.addEventListener("click", () => setButtonShiny(target, opacity));    
+    target.addEventListener("click", () => setButtonShinyPlayer(target, opacity));    
 
     target.addEventListener("mouseenter", () => setPointOption(target, '1', '120px'));
     target.addEventListener("mouseleave", () =>  setPointOption(target, opacity, '100px'));
@@ -156,10 +161,14 @@ function start(){
         document.querySelector("main").style.opacity = 1;
 
         let _argButtonsPlayerOptions = [bRock, bPaper, bScissor, bLizard, bSpock];
-        
-        shinyPlayerButton = null;
-        for (let i = 0; i < _argButtonsPlayerOptions.length; i++)
-            _argButtonsPlayerOptions[i].style.backgroundColor = 'white';                        
+        let _argButtonsEnemyOptions = [ebRock, ebPaper, ebScissor, ebLizard, ebSpock];
+
+        shinyPlayerButton = shinyEnemyButton = null;
+        for (let i = 0; i < 5; i++){
+            _argButtonsPlayerOptions[i].style.opacity = defaultOpacitySelectButtons;
+            _argButtonsEnemyOptions[i].style.opacity = defaultOpacitySelectButtons;
+        }
+                                    
 
         if(firsTime){            
 
@@ -190,13 +199,14 @@ function drawGameStatus(status){
 function battle(electionPlayer, electionEnemy){
     playerChoice.src = electionPlayer.source;
     enemyChoice.src = electionEnemy.source;
-    compareElections(electionPlayer, electionEnemy);    
+    compareElections(electionPlayer, electionEnemy);        
 }
 //-------------------------------------------
 //Your functions
-function handleMyOption(election){
-       
+function handleMyOption(election){   
     let e = getEnemyElection();
+    setButtonShinyEnemy(e);
+
     battle(election, e);
 }
 function setPointOption(target, opacity, size){
@@ -206,17 +216,34 @@ function setPointOption(target, opacity, size){
     target.style.width = size;
     target.style.height = size;
 }
-function setButtonShiny(target, opacity){
-    console.log("< after: " + shinyPlayerButton);
+function setButtonShinyPlayer(target, opacity){
     if(shinyPlayerButton != null)
         shinyPlayerButton.style.opacity = opacity; 
 
     shinyPlayerButton = target;
     shinyPlayerButton.style.opacity = '1';
-
-    console.log("< before: " + shinyPlayerButton.id);
 }
+function setButtonShinyEnemy(gameOption){
+    let target = null;
+    switch(gameOption){
+        case(rock): target = ebRock;
+            break;
+        case(paper): target = ebPaper;
+            break;
+        case(scissor): target = ebScissor
+            break;
+        case(lizard): target = ebLizard;
+            break;
+        case(spock): target = ebSpock;
+            break;
+    }
 
+    if(shinyEnemyButton != null)
+        shinyEnemyButton.style.opacity = defaultOpacitySelectButtons;
+
+    shinyEnemyButton = target;
+    shinyEnemyButton.style.opacity = '1';
+}
 
 // function setButtonShiny(target, revert){
 //     if(shinyButton != null)
