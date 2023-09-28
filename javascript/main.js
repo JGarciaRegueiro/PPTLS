@@ -1,4 +1,4 @@
-//Clases
+//Clases y constantes
 class GameOption{
     constructor(option, win, source){
         this.option = option;
@@ -6,21 +6,6 @@ class GameOption{
         this.source = source;  
     }
 }
-
-//Atributos
-let firsTime = true;
-
-let playerNameChoose, iaDifficult, buttonPlay; 
-
-let playerName, enemyName;
-let playerChoice, enemyChoice;
-
-let scorePlayer, scoreEnemy;
-let scoreText, gameStatus;
-
-let getEnemyElection;
-
-let bRock, bPaper, bScissor, bLizard, bSpock;
 
 const srcEmpty = "../imgs/Question.jpg";
 const srcRock = "../imgs/Rock.jpg";
@@ -34,9 +19,35 @@ const paper = new GameOption("paper", ["rock", "spock"], srcPaper);
 const scissor = new GameOption("scissor", ["paper", "lizard"], srcScissor);
 const lizard = new GameOption("lizard", ["spock", "paper"], srcLizard);
 const spock = new GameOption("spock", ["rock", "paper"], srcSpock);
+
+
+//Referencias
+let playerNameChoose, iaDifficult, buttonPlay; 
+
+let playerName, enemyName;
+let playerChoice, enemyChoice;
+
+let scoreText, gameStatus;
+let bRock, bPaper, bScissor, bLizard, bSpock;
+let ebRock, ebPaper, ebScissor, ebLizard, ebSpock;
+
+//Atributos
+let firsTime = true;
+
+let scorePlayer, scoreEnemy;
+
+const probabilityEnemyElectionsStartValue = 5;
+let probabilityEnemyElections;
+let enemyElections;
+let getEnemyElection;
+
+
+let shinyButton;
+
 //-------------------------------------------
 //Main code
 function compareElections(playerOption, enemyOption){    
+    //Se repite 2 o más veces este código
     let aux = "";
     let strEnemy = enemyOption.option;
 
@@ -89,7 +100,11 @@ function init(){
     bLizard = document.getElementById("option_lizard");
     bSpock = document.getElementById("option_spock");
 
-    
+    // bRock = document.getElementById("p_rock");
+    // bPaper = document.getElementById("p_paper");
+    // bScissor = document.getElementById("p_scissor");
+    // bLizard = document.getElementById("p_lizard");
+    // bSpock = document.getElementById("p_spock");
 }
 
 function addEvents(){
@@ -100,13 +115,16 @@ function addEvents(){
 }
 
 function initPlayerOptions(target, myClass){
-    target.addEventListener("click", () => handleMyOption(myClass));
+    //border: solid 2px black;
 
-    target.addEventListener("click", () => handleMyOption(myClass));
-    
-    let re = target.style.backgroundColor;
+    target.style.backgroundColor = 'white';
+    let revertColor = target.style.backgroundColor;
+
+    target.addEventListener("click", () => handleMyOption(myClass));    
+    target.addEventListener("click", () => setButtonShiny(target, revertColor));    
+
     target.addEventListener("mouseenter", () => target.style.backgroundColor = "yellow");
-    target.addEventListener("mouseleave", () => target.style.backgroundColor = re);
+    target.addEventListener("mouseleave", () => target.style.backgroundColor = getColor(target, revertColor));
 }
 
 function start(){
@@ -130,25 +148,31 @@ function start(){
     
         drawGameStatus("Waiting...");
         document.querySelector("main").style.opacity = 1;
-    
-        console.log("GAME START!");   
 
-        if(firsTime){
-            initPlayerOptions(bRock, rock);            
-            initPlayerOptions(bPaper, paper);
-            initPlayerOptions(bScissor, scissor);
-            initPlayerOptions(bLizard, lizard);
-            initPlayerOptions(bSpock, spock);
-            /*
-            bRock.addEventListener("click", () => handleMyOption(rock));
-            bPaper.addEventListener("click", () => handleMyOption(paper));
-            bScissor.addEventListener("click", () => handleMyOption(scissor));
-            bLizard.addEventListener("click", () => handleMyOption(lizard));
-            bSpock.addEventListener("click", () => handleMyOption(spock));
-            */
-            firsTime =false;
+        let _argButtonsPlayerOptions = [bRock, bPaper, bScissor, bLizard, bSpock];
+        
+        shinyButton = null;
+        for (let i = 0; i < _argButtonsPlayerOptions.length; i++)
+            _argButtonsPlayerOptions[i].style.backgroundColor = 'white';                        
+
+        if(firsTime){            
+
+            let _argGameOptions = [rock, paper, scissor, lizard, spock];
+
+            for (let i = 0; i < _argButtonsPlayerOptions.length; i++) {
+                initPlayerOptions(_argButtonsPlayerOptions[i], _argGameOptions[i]);    
+            }
+
+            // initPlayerOptions(bRock, rock);            
+            // initPlayerOptions(bPaper, paper);
+            // initPlayerOptions(bScissor, scissor);
+            // initPlayerOptions(bLizard, lizard);
+            // initPlayerOptions(bSpock, spock);
+
+            firsTime = false;
         }
-       
+
+        console.log("GAME START!");  
     }
 }
 
@@ -169,45 +193,99 @@ function handleMyOption(election){
     let e = getEnemyElection();
     battle(election, e);
 }
+function setButtonShiny(target, revert){
+    if(shinyButton != null)
+        shinyButton.style.backgroundColor = revert; 
+
+    shinyButton = target;
+    shinyButton.style.backgroundColor = 'green';
+}
+
+function getColor(target, savedColor){
+    if(target == shinyButton)
+        return 'green';
+    return savedColor;
+}
 
 //-------------------------------------------
 //Enemy functions
 function getEnemyIAFunctionality(){
     console.log("You choose " + iaDifficult.value); 
 
-    switch(iaDifficult.value.toLowerCase){    
-        case "normal": getEnemyElectionNormal();
+    let aux;
+
+    switch(iaDifficult.value){    
+        case "Normal": 
+            enemyElections = [rock, paper, scissor, lizard, spock]            
+            aux = getEnemyElectionNormal;            
             break;
-        case "classic": getEnemyElectionClassic();
-            break;  
-        case "spock": getEnemyElectionSpock();
-            break;  
-        case "intelligent": getEnemyElectionIntelligent();
+        case "Classic": 
+            enemyElections = [rock, paper, scissor]
+            aux = getEnemyElectionClassic;            
+            break;
+        case "Spock": 
+            enemyElections = [spock]
+            aux = getEnemyElectionSpock;    
+            break;        
+        case "Intelligent": 
+            enemyElections = [rock, paper, scissor, lizard, spock]
+            aux = getEnemyElectionIntelligent;
+            break;
         default:
             return null;
     }
-    
+
+    probabilityEnemyElections = []
+
+    console.log(enemyElections);
+    for (let i = 0; i < enemyElections.length; i++) {
+        probabilityEnemyElections[i] = probabilityEnemyElectionsStartValue;
+    }
+
+    return aux;
 }
 
 function getEnemyElectionNormal(){
-    return translateNumberIntoClass(getRandomOption(5));
+    return convertNumberIntoClass(getRandomOption(5));
 }
 function getEnemyElectionSpock(){
-    translateNumberIntoClass(5);
+    return spock;
 }
 function getEnemyElectionClassic(){
-    return translateNumberIntoClass(getRandomOption(3));
+    return convertNumberIntoClass(getRandomOption(3));
 }
 function getEnemyElectionIntelligent(){
-    
-    return null;
+    return getRandomOption();
+}
+
+function getRandomOption(){
+    let total = 0;
+    let rng = 0, waste = 0;
+
+    for (let i = 0; i < probabilityEnemyElections.length; i++) {
+        total += probabilityEnemyElections[i];
+    }
+
+    rng = Math.floor(Math.random() * total + 1);    
+
+    for (let i = 0; i < enemyElections.length; i++) {
+        waste += probabilityEnemyElections[i];
+
+        console.log(">>> " +rng + " <= " + waste + " | " + total);
+
+        if(rng <= waste){
+            console.log(enemyElections[i].option + " is the decision");
+            console.log(enemyElections[i].source + "");            
+            return enemyElections[i];          
+        }
+    }
 }
 
 function getRandomOption(max){
     return Math.floor(Math.random() * max) + 1;
 }
 
-function translateNumberIntoClass(number){    
+function convertNumberIntoClass(number){    
     switch(number){
         case 1: return rock;
         case 2: return paper;
