@@ -50,6 +50,7 @@ h2{
 
 .small-image{
     width: 100px;
+    height: 100px;
 }
 
 
@@ -65,13 +66,16 @@ h2{
 }
 
 .buttons-content{        
-    display: flex;
+display: flex;
     flex-direction: column;
     
     gap: 20px;
 }
 
 .buttons-content img{
-    margin: auto;
-    
+    margin: auto;    
+
+    float: left;
+
+    color: red;
 }

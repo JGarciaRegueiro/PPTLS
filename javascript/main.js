@@ -42,7 +42,7 @@ let enemyElections;
 let getEnemyElection;
 
 
-let shinyButton;
+let shinyPlayerButton;
 
 //-------------------------------------------
 //Main code
@@ -94,17 +94,17 @@ function init(){
     gameStatus = document.getElementById("game_status");
 
     //Asignación de las opciones que se pueden tomar
-    bRock = document.getElementById("option_rock");
-    bPaper = document.getElementById("option_paper");
-    bScissor = document.getElementById("option_scissor");
-    bLizard = document.getElementById("option_lizard");
-    bSpock = document.getElementById("option_spock");
+    // bRock = document.getElementById("option_rock");
+    // bPaper = document.getElementById("option_paper");
+    // bScissor = document.getElementById("option_scissor");
+    // bLizard = document.getElementById("option_lizard");
+    // bSpock = document.getElementById("option_spock");
 
-    // bRock = document.getElementById("p_rock");
-    // bPaper = document.getElementById("p_paper");
-    // bScissor = document.getElementById("p_scissor");
-    // bLizard = document.getElementById("p_lizard");
-    // bSpock = document.getElementById("p_spock");
+    bRock = document.getElementById("p_rock");
+    bPaper = document.getElementById("p_paper");
+    bScissor = document.getElementById("p_scissor");
+    bLizard = document.getElementById("p_lizard");
+    bSpock = document.getElementById("p_spock");
 }
 
 function addEvents(){
@@ -116,15 +116,21 @@ function addEvents(){
 
 function initPlayerOptions(target, myClass){
     //border: solid 2px black;
+    let opacity = '.5';
 
-    target.style.backgroundColor = 'white';
-    let revertColor = target.style.backgroundColor;
+    //target.style.backgroundColor = 'white';
+    //let revertColor = target.style.backgroundColor;
+    //target.addEventListener("click", () => setButtonShiny(target, revertColor));    
 
+    target.style.opacity = opacity;
     target.addEventListener("click", () => handleMyOption(myClass));    
-    target.addEventListener("click", () => setButtonShiny(target, revertColor));    
+    target.addEventListener("click", () => setButtonShiny(target, opacity));    
 
-    target.addEventListener("mouseenter", () => target.style.backgroundColor = "yellow");
-    target.addEventListener("mouseleave", () => target.style.backgroundColor = getColor(target, revertColor));
+    target.addEventListener("mouseenter", () => setPointOption(target, '1', '120px'));
+    target.addEventListener("mouseleave", () =>  setPointOption(target, opacity, '100px'));
+  
+    // target.addEventListener("mouseenter", () => target.style.backgroundColor = "yellow");
+    // target.addEventListener("mouseleave", () => target.style.backgroundColor = getColor(target, revertColor));
 }
 
 function start(){
@@ -151,7 +157,7 @@ function start(){
 
         let _argButtonsPlayerOptions = [bRock, bPaper, bScissor, bLizard, bSpock];
         
-        shinyButton = null;
+        shinyPlayerButton = null;
         for (let i = 0; i < _argButtonsPlayerOptions.length; i++)
             _argButtonsPlayerOptions[i].style.backgroundColor = 'white';                        
 
@@ -193,19 +199,38 @@ function handleMyOption(election){
     let e = getEnemyElection();
     battle(election, e);
 }
-function setButtonShiny(target, revert){
-    if(shinyButton != null)
-        shinyButton.style.backgroundColor = revert; 
+function setPointOption(target, opacity, size){
+    if(target != shinyPlayerButton)
+        target.style.opacity = opacity;
+    
+    target.style.width = size;
+    target.style.height = size;
+}
+function setButtonShiny(target, opacity){
+    console.log("< after: " + shinyPlayerButton);
+    if(shinyPlayerButton != null)
+        shinyPlayerButton.style.opacity = opacity; 
 
-    shinyButton = target;
-    shinyButton.style.backgroundColor = 'green';
+    shinyPlayerButton = target;
+    shinyPlayerButton.style.opacity = '1';
+
+    console.log("< before: " + shinyPlayerButton.id);
 }
 
-function getColor(target, savedColor){
-    if(target == shinyButton)
-        return 'green';
-    return savedColor;
-}
+
+// function setButtonShiny(target, revert){
+//     if(shinyButton != null)
+//         shinyButton.style.backgroundColor = revert; 
+
+//     shinyButton = target;
+//     shinyButton.style.backgroundColor = 'green';
+// }
+
+// function getColor(target, savedColor){
+//     if(target == shinyButton)
+//         return 'green';
+//     return savedColor;
+// }
 
 //-------------------------------------------
 //Enemy functions
