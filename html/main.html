@@ -14,6 +14,22 @@
 
 <body>
 
+    <header>
+        <div class="player-creator">
+            Introduce your name: <input type="text" id="player_name">
+            <button id="play_button" >Play!</button>
+        </div>
+        <div class="enemy-chooser">
+            Choose Enemy: 
+            <select id="enemy">
+                <option value="Normal">Normal</option>
+                <option value="Classic">Classic</option>
+                <option value="Intelligent">Intelligent</option>
+                <option value="Spock">Spock</option>
+            </select>
+        </div>        
+    </header>
+
     <main>
         <div class=" game-content">
             <div class="buttons-content">
@@ -44,47 +60,6 @@
                 <img id="e_spock" class="small-image" src="../imgs/Spock.jpg" alt="">
             </div>        
         </div>
-        
-       
-        <div class="display-center player-options-content">
-            <div id="option_rock" class="option-content">
-                <img class="rounded small-image" src="../imgs/Rock.jpg" alt="">
-                <h3>Rock</h3>
-            </div>
-            <div id="option_paper" class="option-content">
-                <img class="rounded small-image" src="../imgs/Paper.jpg" alt="">
-                <h3>Paper</h3>
-            </div>
-            <div  id="option_scissor" class="option-content">
-                <img class="rounded small-image" src="../imgs/Scissor.jpg" alt="">
-                <h3>Scissor</h3>
-            </div>
-            <div  id="option_lizard" class="option-content">
-                <img class="rounded small-image" src="../imgs/Lizard.jpg" alt="">
-                <h3>Lizard</h3>
-            </div>
-            <div id="option_spock" class="option-content">
-                <img class="rounded small-image"  src="../imgs/Spock.jpg" alt="">
-                <h3>Spock</h3>
-            </div> 
-        </div>
     </main>
-
-    <header>
-        <div class="player-creator">
-            Introduce your name: <input type="text" id="player_name">
-            <button id="play_button" >Play!</button>
-        </div>
-        <div class="enemy-chooser">
-            Choose Enemy: 
-            <select id="enemy">
-                <option value="Normal">Normal</option>
-                <option value="Classic">Classic</option>
-                <option value="Intelligent">Intelligent</option>
-                <option value="Spock">Spock</option>
-            </select>
-        </div>        
-    </header>
-
 </body>
 </html>
