@@ -3,6 +3,10 @@ function jugar() {
         var main = document.querySelector("main");
         main.style.pointerEvents="auto";
         main.style.opacity=1;
+        var colorPlayer = document.getElementById("colorPlayer");
+        var colorOpponent = document.getElementById("colorOpponent");
+        document.querySelector("html").style.setProperty("--jugador", colorPlayer.value);
+        document.querySelector("html").style.setProperty("--oponente", colorOpponent.value);
         var nombre = document.getElementById("nombre");
         var nombreJugador = document.getElementById("nombreJugador");
         nombreJugador.textContent = nombre.value;
@@ -13,15 +17,15 @@ function jugar() {
 function eleccionJugador(img){
     var imagenes = document.getElementsByClassName("select__image");
     for(let i=0; i<imagenes.length; i++){
-        imagenes[i].style.opacity="0.2";
+        imagenes[i].removeAttribute("style","opacity");
     }
     var imagenes2 = document.getElementsByClassName("select__image2");
     for(let i=0; i<imagenes2.length; i++){
-        imagenes2[i].style.opacity="0.2";
+        imagenes2[i].removeAttribute("style","opacity");
     }
     var eleccionJugador = document.getElementById("eleccionJugador");
     eleccionJugador.src = img.src;
-    img.style.opacity="1";
+    img.setAttribute("style","opacity:1");
     var eleccion = eleccionOponente();
     resultado(img, eleccion);
     contador();
@@ -44,102 +48,21 @@ function getRandomInt(min, max) {
 
 function resultado(img, eleccionOponente){
     var resultado = document.getElementById("resultado");
+    var tabla = {"piedra": ["tijeras","lagarto"],
+                "papel": ["piedra","spock"],
+                "tijeras": ["papel","lagarto"],
+                "lagarto": ["papel","spock"],
+                "spock": ["piedra","tijeras"]
+                };
 
-    if (img.id == "piedra"){
-        if (eleccionOponente == "piedra"){
-            resultado.textContent="empate";
-        }
-        else if (eleccionOponente == "papel"){
-            resultado.textContent="perdiste";
-        }
-        else if (eleccionOponente == "tijeras"){
-            resultado.textContent="ganaste";
-        }
-        else if (eleccionOponente == "lagarto"){
-            resultado.textContent="ganaste";
-        }
-        else if (eleccionOponente == "spock"){
-            resultado.textContent="perdiste";
-        }
-        contador(resultado.textContent);
+    if (eleccionOponente === img.id) {
+        resultado.textContent = "empate";
+    } else if (tabla[img.id].includes(eleccionOponente)) {
+        resultado.textContent = "ganaste";
+    } else {
+        resultado.textContent = "perdiste";
     }
-
-    
-    if (img.id == "papel"){
-        if (eleccionOponente == "piedra"){
-            resultado.textContent="ganaste";
-        }
-        else if (eleccionOponente == "papel"){
-            resultado.textContent="empate";
-        }
-        else if (eleccionOponente == "tijeras"){
-            resultado.textContent="perdiste";
-        }
-        else if (eleccionOponente == "lagarto"){
-            resultado.textContent="perdiste";
-        }
-        else if (eleccionOponente == "spock"){
-            resultado.textContent="ganaste";
-        }
-        contador(resultado.textContent);
-    }
-
-    if (img.id == "tijeras"){
-         if (eleccionOponente == "piedra"){
-            resultado.textContent="perdiste";
-        }
-        else if (eleccionOponente == "papel"){
-            resultado.textContent="ganaste";
-        }
-        else if (eleccionOponente == "tijeras"){
-            resultado.textContent="empate";
-        }
-        else if (eleccionOponente == "lagarto"){
-            resultado.textContent="ganaste";
-        }
-        else if (eleccionOponente == "spock"){
-            resultado.textContent="perdiste";
-        }
-        contador(resultado.textContent);
-    }
-
-    if (img.id == "lagarto"){
-        if (eleccionOponente == "piedra"){
-            resultado.textContent="perdiste";
-        }
-        else if (eleccionOponente == "papel"){
-            resultado.textContent="ganaste";
-        }
-        else if (eleccionOponente == "tijeras"){
-            resultado.textContent="perdiste";
-        }
-        else if (eleccionOponente == "lagarto"){
-            resultado.textContent="empate";
-        }
-        else if (eleccionOponente == "spock"){
-            resultado.textContent="ganaste";
-        }
-        contador(resultado.textContent);
-    }
-
-    if (img.id == "spock"){
-        if (eleccionOponente == "piedra"){
-            resultado.textContent="ganaste";
-        }
-        else if (eleccionOponente == "papel"){
-            resultado.textContent="perdiste";
-        }
-        else if (eleccionOponente == "tijeras"){
-            resultado.textContent="ganaste";
-        }
-        else if (eleccionOponente == "lagarto"){
-            resultado.textContent="perdiste";
-        }
-        else if (eleccionOponente == "spock"){
-            resultado.textContent="empate";
-        }
-        contador(resultado.textContent);
-    }
+    contador(resultado.textContent);
 }
 
 function contador(resultado) {
@@ -170,11 +93,15 @@ function reset() {
     resultado.textContent="";
     var imagenes = document.getElementsByClassName("select__image");
     for(let i=0; i<imagenes.length; i++){
-        imagenes[i].style.opacity="0.2";
+        imagenes[i].removeAttribute("style","opacity");
     }
     var imagenes2 = document.getElementsByClassName("select__image2");
     for(let i=0; i<imagenes2.length; i++){
-        imagenes2[i].style.opacity="0.2";
+        imagenes2[i].removeAttribute("style","opacity");
     }
-    
+    var eleccionJugador = document.getElementById("eleccionJugador");
+    var eleccionOponente = document.getElementById("eleccionOponente");
+
+    eleccionJugador.setAttribute("src"," ");
+    eleccionOponente.setAttribute("src"," ");
 }

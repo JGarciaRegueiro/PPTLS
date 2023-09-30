@@ -53,6 +53,7 @@ header {
     gap: 10px;
     justify-content: center;
     padding-top: 50px;
+    align-items: center;
 }
 
 header input {
@@ -60,10 +61,18 @@ header input {
     border-radius: 5px;
 }
 
+.colors {
+    padding: 2px;
+}
+
 .estadisticas {
     display: flex;
     justify-content: space-evenly;
     align-items: center;
+}
+
+.estadisticas div {
+    text-align: center;
 }
 
 .contador {
@@ -114,4 +123,41 @@ footer {
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+@media (max-width:1024px){
+   header {
+        flex-direction: column;
+   }
+   
+   .match {
+        flex-direction: column;
+   } 
+
+   .selectorJugador, .selectorOponente {
+        flex-direction: row;
+    }
+
+    img {
+        height: 50px;
+        width: 50px;
+        border: 2px solid;
+    }
+
+    #eleccionJugador, #eleccionOponente {
+        height: 100px;
+        width: 100px;
+    }
+
+    .contador {
+        font-size: 20px;
+    }
+
+    section {
+        padding: 25px;
+    }
+
+    header label,.colors {
+        display: none;
+    }
 }
