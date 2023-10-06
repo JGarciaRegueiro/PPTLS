@@ -1,3 +1,8 @@
+let firstTime = true;
+let historyGames;
+
+let scorePlayer, scoreOpponent;
+
 function jugar() {
     if (validar()) {
         var main = document.querySelector("main");
@@ -10,7 +15,12 @@ function jugar() {
         var nombre = document.getElementById("nombre");
         var nombreJugador = document.getElementById("nombreJugador");
         nombreJugador.textContent = nombre.value;
-        reset();
+        if(firstTime){
+            firstTime = false;
+            console.log("Not first time");
+        }
+        else SaveMatch(nombre.value);
+        reset();        
     }
 }
 
@@ -104,4 +114,31 @@ function reset() {
 
     eleccionJugador.setAttribute("src"," ");
     eleccionOponente.setAttribute("src"," ");
+
+    //var historyButton = ;
+    
+}
+
+function SaveMatch(){
+    historyGames.push(scorePlayer.textContent + " vs " + scoreOpponent.textContent);
+}
+
+function ShowMatch(){
+    if(!firstTime) {        
+        let str = "Games";
+        for(let i = 0; i < historyGames.length; i++){
+            str += "\nGame " + (i+1) + ": " + historyGames[i];            
+        }
+    
+        str += "\nCurrent Game: " + scorePlayer.textContent + " vs " + scoreOpponent.textContent;
+        alert(str);
+    }
+}
+
+window.onload = function(){
+    console.log("loading...");    
+    historyGames = [];
+    
+    scorePlayer = document.getElementById("puntuacionJugador");
+    scoreOpponent = document.getElementById("puntuacionOponente");
 }
