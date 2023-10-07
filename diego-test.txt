@@ -1,3 +1,1 @@
 Hola, esto es un doc de prueba
-
-Hola, soy Pablo y estoy editanto el archivo de DiegoTest
