@@ -1,5 +1,7 @@
 var marcadorJugador = 0;
 var marcadorOrdenador =0;
+botonesJugador = document.getElementsByClassName("btn");
+
 
 
 
@@ -12,16 +14,32 @@ function getNombre() {
     popup_inicial.style.display='none';
 }
 
+function resetearSeleccion(){
+    botonesJugador = document.getElementsByClassName("btn");
+    for (var i = 0; i <= 5; i++) {
+        botonesJugador[i].style.transform = "scale(1)"; // Imprime los números del 1 al 5 en la consola
+    }
+
+
+}
 
 
 function jugar(seleccionJugador){
     var visu = document.getElementById("nombre-jugador");
+    botonesJugador = document.getElementsByClassName("btn");
+
+    resetearSeleccion();
+
     
+
     seleccionOrdenador= Math.floor(Math.random() * 5);
 
     resultado = ganador(seleccionJugador,seleccionOrdenador);
     
     actualizarImagenes(seleccionJugador,seleccionOrdenador);
+
+
+    botonesJugador[seleccionJugador].style.transform = "scale(1.2)";
 
     actualizarMarcador(resultado);
 
@@ -158,5 +176,6 @@ function reiniciarJuego(){
     marcadorOrdenador= 0;
     visuMarcadorJug.textContent =marcadorJugador;
     visuMarcadorOrd.textContent =marcadorOrdenador;
+    resetearSeleccion();
 }
 
