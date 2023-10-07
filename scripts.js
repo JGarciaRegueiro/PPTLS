@@ -1,47 +1,56 @@
 var marcadorJugador = 0;
 var marcadorOrdenador =0;
-botonesJugador = document.getElementsByClassName("btn");
 
 
+var botonesJugador = document.getElementsByClassName("btn-jugador");
+var botonesOrdenador = document.getElementsByClassName("btn-ordenador");
 
 
-function getNombre() {
-    var nombre = document.getElementById("nombre").value;
+function getNombre(indice) {
+    var nombre_input_0 = document.getElementById("nombre").value;
+    var nombre_input_1 = document.getElementById("nombre-input").value;
     var visu = document.getElementById("nombre-jugador");
     var popup_inicial = document.getElementById("popup-inicial")
+
+    if(indice == 1)  {
+        visu.innerHTML = nombre_input_1
+        popup_inicial.style.display='none';
+    }else{
+        visu.innerHTML = nombre_input_0
+    }
+
+    resetearSeleccion();
+    reiniciarJuego();
    
-    visu.innerHTML = nombre
-    popup_inicial.style.display='none';
+    
 }
 
 function resetearSeleccion(){
-    botonesJugador = document.getElementsByClassName("btn");
-    for (var i = 0; i <= 5; i++) {
-        botonesJugador[i].style.transform = "scale(1)"; // Imprime los números del 1 al 5 en la consola
+    for (var i = 0; i <= 4; i++) {
+            botonesJugador[i].style.transform = "scale(1)"; 
+            botonesOrdenador[i].style.transform = "scale(1)";// Imprime los números del 1 al 5 en la consola
     }
 
+}
 
+function resaltarSeleccion(seleccionJugador,seleccionOrdenador){
+    botonesJugador[seleccionJugador].style.transform = "scale(1.5)";
+    botonesOrdenador[seleccionOrdenador].style.transform = "scale(1.5)";
 }
 
 
 function jugar(seleccionJugador){
+
     var visu = document.getElementById("nombre-jugador");
-    botonesJugador = document.getElementsByClassName("btn");
 
     resetearSeleccion();
-
-    
-
     seleccionOrdenador= Math.floor(Math.random() * 5);
-
     resultado = ganador(seleccionJugador,seleccionOrdenador);
-    
+
     actualizarImagenes(seleccionJugador,seleccionOrdenador);
-
-
-    botonesJugador[seleccionJugador].style.transform = "scale(1.2)";
-
     actualizarMarcador(resultado);
+    resaltarSeleccion(seleccionJugador,seleccionOrdenador);
+
 
     // Definimos el numero de intentos para fin partida
 
@@ -63,10 +72,8 @@ function random(){
 }
 
 function actualizarImagenes(seleccionJugador,seleccionOrdenador){
-
     var visu_jugador = document.getElementById("imagen-visu-jugador");
     var visu_ordenador = document.getElementById("imagen-visu-ordenador");
-
     // Actualizamos segun seleccion del jugador
     if (seleccionJugador==0) {
         visu_jugador.src="images/piedra.png";
@@ -155,6 +162,7 @@ function actualizarMarcador(resultado){
 function finPartida() {
     var modal = document.getElementById("popup");
     var texto_popup = document.getElementById("texto-popup");
+
     modal.style.display = "block";
 
     if (marcadorJugador >= 3 && marcadorOrdenador<3 ){
@@ -171,6 +179,7 @@ function reiniciarJuego(){
     var modal = document.getElementById("popup");
     var visuMarcadorJug = document.getElementById("marcador-jugador");
     var visuMarcadorOrd = document.getElementById("marcador-ordenador");
+
     modal.style.display = "none";
     marcadorJugador = 0;
     marcadorOrdenador= 0;

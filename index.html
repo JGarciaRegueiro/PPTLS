@@ -12,20 +12,19 @@
     <header>
                 <label for="nombre">Introduce tu nombre:</label>
                 <input type="text" name="nombre-input" id="nombre">
-                <button type="button" id="jugar-button" onclick="getNombre()">Jugar</button>
+                <button type="button" id="jugar-button" onclick="getNombre(0)">Jugar</button>
     </header>
     <main class="principal">
         <aside class="botones">
             <div>
-                <p>Tú:</p>
-                <label id="nombre-jugador">Inserte su nombre </label>
+                <label id="nombre-jugador" class="texto-jugador">Inserte su nombre </label>
             </div>
 
-            <button  class="btn" onclick="jugar(0)"><img src="images/piedra.png" width="50px"></button>
-            <button  class="btn" onclick="jugar(1)"><img src="images/papel.png" width="50px"></button>
-            <button  class="btn" onclick="jugar(2)"><img src="images/tijeras.png" width="50px"></button>
-            <button  class="btn" onclick="jugar(3)"><img src="images/lagarto.png" width="50px"></button>
-            <button  class="btn" onclick="jugar(4)"><img src="images/spoke.png" width="50px"></button>
+            <button  class="btn-jugador" onclick="jugar(0)"><img src="images/piedra.png" width="50px"></button>
+            <button  class="btn-jugador" onclick="jugar(1)"><img src="images/papel.png" width="50px"></button>
+            <button  class="btn-jugador" onclick="jugar(2)"><img src="images/tijeras.png" width="50px"></button>
+            <button  class="btn-jugador" onclick="jugar(3)"><img src="images/lagarto.png" width="50px"></button>
+            <button  class="btn-jugador" onclick="jugar(4)"><img src="images/spoke.png" width="50px"></button>
 
         </aside>
 
@@ -52,14 +51,14 @@
         <aside class="botones">
 
             <div>
-                <p>Ordenador</p>
+                <label id="nombre-jugador" class="texto-ordenador">Ordenador:</label>
             </div>
 
-            <button class="btn"><img src="images/piedra.png" width="50px"></button>
-            <button class="btn"><img src="images/papel.png" width="50px"></button>
-            <button class="btn"><img src="images/tijeras.png" width="50px"></button>
-            <button class="btn"><img src="images/lagarto.png" width="50px"></button>
-            <button class="btn"><img src="images/spoke.png" width="50px"></button>
+            <button class="btn-ordenador"><img src="images/piedra.png" width="50px"></button>
+            <button class="btn-ordenador"><img src="images/papel.png" width="50px"></button>
+            <button class="btn-ordenador"><img src="images/tijeras.png" width="50px"></button>
+            <button class="btn-ordenador"><img src="images/lagarto.png" width="50px"></button>
+            <button class="btn-ordenador"><img src="images/spoke.png" width="50px"></button>
 
         </aside>
 
@@ -73,8 +72,8 @@
         <div id="popup-inicial" class="modal-inicial">
             <div class="modal-content">
                 <label for="nombre">Introduce tu nombre:</label>
-                <input type="text" name="nombre-input" id="nombre">
-                <button type="button" id="jugar-button" onclick="getNombre()">Jugar</button>
+                <input type="text" name="nombre-input" id="nombre-input">
+                <button type="button" id="jugar-button" onclick="getNombre(1)">Jugar</button>
             </div>
     </div>
 
