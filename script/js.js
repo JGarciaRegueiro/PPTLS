@@ -5,11 +5,11 @@ let scorePlayer, scoreOpponent;
 
 function jugar() {
     if (validar()) {
-        var main = document.querySelector("main");
-        var colorPlayer = document.getElementById("colorPlayer");
-        var colorOpponent = document.getElementById("colorOpponent");
-        var nombre = document.getElementById("nombre");
-        var nombreJugador = document.getElementById("nombreJugador");
+        let main = document.querySelector("main");
+        let colorPlayer = document.getElementById("colorPlayer");
+        let colorOpponent = document.getElementById("colorOpponent");
+        let nombre = document.getElementById("nombre");
+        let nombreJugador = document.getElementById("nombreJugador");
 
         main.style.pointerEvents="auto";
         main.style.opacity=1;                
@@ -28,17 +28,21 @@ function jugar() {
 
 function eleccionJugador(img){
     var imagenes = document.getElementsByClassName("select__image");
+    var imagenes2 = document.getElementsByClassName("select__image2");
+    var eleccionJugador = document.getElementById("eleccionJugador");
+
+    var eleccion = eleccionOponente();
+
     for(let i=0; i<imagenes.length; i++){
         imagenes[i].removeAttribute("style","opacity");
     }
-    var imagenes2 = document.getElementsByClassName("select__image2");
     for(let i=0; i<imagenes2.length; i++){
         imagenes2[i].removeAttribute("style","opacity");
     }
-    var eleccionJugador = document.getElementById("eleccionJugador");
+    
     eleccionJugador.src = img.src;
     img.setAttribute("style","opacity:1");
-    var eleccion = eleccionOponente();
+    
     resultado(img, eleccion);
     contador();
 }
