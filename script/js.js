@@ -1,3 +1,10 @@
+const tabla = 
+{   "piedra":   ["tijeras","lagarto"],
+    "papel":    ["piedra","spock"],
+    "tijeras":  ["papel","lagarto"],
+    "lagarto":  ["papel","spock"],
+    "spock":    ["piedra","tijeras"] 
+};
 let firstTime = true;
 let historyGames;
 
@@ -66,13 +73,7 @@ function getRandomInt(min, max) {
 }
 
 function resultado(img, eleccionOponente){
-    var resultado = document.getElementById("resultado");
-    var tabla = {"piedra": ["tijeras","lagarto"],
-                "papel": ["piedra","spock"],
-                "tijeras": ["papel","lagarto"],
-                "lagarto": ["papel","spock"],
-                "spock": ["piedra","tijeras"]
-                };
+    let resultado = document.getElementById("resultado");
 
     if (eleccionOponente === img.id) {
         resultado.textContent = "empate";
@@ -81,6 +82,7 @@ function resultado(img, eleccionOponente){
     } else {
         resultado.textContent = "perdiste";
     }
+    
     contador(resultado.textContent);
 }
 
