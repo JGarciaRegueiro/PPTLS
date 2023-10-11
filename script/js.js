@@ -6,20 +6,22 @@ let scorePlayer, scoreOpponent;
 function jugar() {
     if (validar()) {
         var main = document.querySelector("main");
-        main.style.pointerEvents="auto";
-        main.style.opacity=1;
         var colorPlayer = document.getElementById("colorPlayer");
         var colorOpponent = document.getElementById("colorOpponent");
-        document.querySelector("html").style.setProperty("--jugador", colorPlayer.value);
-        document.querySelector("html").style.setProperty("--oponente", colorOpponent.value);
         var nombre = document.getElementById("nombre");
         var nombreJugador = document.getElementById("nombreJugador");
+
+        main.style.pointerEvents="auto";
+        main.style.opacity=1;                
+        
+        document.querySelector("html").style.setProperty("--jugador", colorPlayer.value);
+        document.querySelector("html").style.setProperty("--oponente", colorOpponent.value);
+
         nombreJugador.textContent = nombre.value;
-        if(firstTime){
-            firstTime = false;
-            console.log("Not first time");
-        }
+        
+        if(firstTime) firstTime = false;            
         else SaveMatch(nombre.value);
+        
         reset();        
     }
 }
