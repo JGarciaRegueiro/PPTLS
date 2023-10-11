@@ -27,11 +27,11 @@ function jugar() {
 }
 
 function eleccionJugador(img){
-    var imagenes = document.getElementsByClassName("select__image");
-    var imagenes2 = document.getElementsByClassName("select__image2");
-    var eleccionJugador = document.getElementById("eleccionJugador");
+    let imagenes = document.getElementsByClassName("select__image");
+    let imagenes2 = document.getElementsByClassName("select__image2");
+    let eleccionJugador = document.getElementById("eleccionJugador");
 
-    var eleccion = eleccionOponente();
+    let eleccion = eleccionOponente();
 
     for(let i=0; i<imagenes.length; i++){
         imagenes[i].removeAttribute("style","opacity");
@@ -41,6 +41,7 @@ function eleccionJugador(img){
     }
     
     eleccionJugador.src = img.src;
+
     img.setAttribute("style","opacity:1");
     
     resultado(img, eleccion);
@@ -48,11 +49,13 @@ function eleccionJugador(img){
 }
 
 function eleccionOponente(){
-    var eleccionOponente = document.getElementById("eleccionOponente");
-    var opciones = ["piedra","papel","tijeras","lagarto","spock"];
-    var eleccion = opciones[getRandomInt(0,5)];
+    let eleccionOponente = document.getElementById("eleccionOponente");
+    let opciones = ["piedra","papel","tijeras","lagarto","spock"];
+    let eleccion = opciones[getRandomInt(0,5)];    
+
     eleccionOponente.src = document.getElementById(eleccion).src;
     document.getElementById(eleccion+"Op").style.opacity = "1";
+    
     return eleccion;
 }
 
