@@ -27,7 +27,7 @@ function jugar() {
         nombreJugador.textContent = nombre.value;
         
         if(firstTime) firstTime = false;            
-        else SaveMatch(nombre.value);
+        else saveMatch(nombre.value);
         
         reset();        
     }
@@ -137,11 +137,11 @@ function reset() {
     eleccionOponente.setAttribute("src"," ");
 }
 
-function SaveMatch(){
+function saveMatch(){
     historyGames.push(scorePlayer.textContent + " vs " + scoreOpponent.textContent);
 }
 
-function ShowMatch(){
+function showMatch(){
     if(!firstTime) {        
         let str = "Games";
         for(let i = 0; i < historyGames.length; i++){
@@ -159,4 +159,7 @@ window.onload = function(){
     
     scorePlayer = document.getElementById("puntuacionJugador");
     scoreOpponent = document.getElementById("puntuacionOponente");
+
+    document.getElementById("bPlay").addEventListener("click", jugar);
+    document.getElementById("bHistory").addEventListener("click", showMatch);
 }
