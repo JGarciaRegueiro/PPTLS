@@ -82,13 +82,14 @@ function resultado(img, eleccionOponente){
     } else {
         resultado.textContent = "perdiste";
     }
-    
+
     contador(resultado.textContent);
 }
 
 function contador(resultado) {
-    var puntuacionJugador = document.getElementById("puntuacionJugador");
-    var puntuacionOponente = document.getElementById("puntuacionOponente");
+    let puntuacionJugador = document.getElementById("puntuacionJugador");
+    let puntuacionOponente = document.getElementById("puntuacionOponente");
+    
     if (resultado == "ganaste"){
         puntuacionJugador.textContent = parseInt(puntuacionJugador.textContent) + 1;
     } 
@@ -105,29 +106,35 @@ function validar() {
 }
 
 function reset() {
+    let puntuacionJugador = document.getElementById("puntuacionJugador");
+    let puntuacionOponente = document.getElementById("puntuacionOponente");
+    let resultado = document.getElementById("resultado");
+    
+    let eleccionJugador = document.getElementById("eleccionJugador");
+    let eleccionOponente = document.getElementById("eleccionOponente");
+
+    let imagenes = document.getElementsByClassName("select__image");
+    let imagenes2 = document.getElementsByClassName("select__image2");
+
     document.getElementById("nombre").value="";
-    var puntuacionJugador = document.getElementById("puntuacionJugador");
-    var puntuacionOponente = document.getElementById("puntuacionOponente");
-    var resultado = document.getElementById("resultado");
+
     puntuacionJugador.textContent = 0;
     puntuacionOponente.textContent = 0;
     resultado.textContent="";
-    var imagenes = document.getElementsByClassName("select__image");
+    
+   
+
     for(let i=0; i<imagenes.length; i++){
         imagenes[i].removeAttribute("style","opacity");
     }
-    var imagenes2 = document.getElementsByClassName("select__image2");
+    
     for(let i=0; i<imagenes2.length; i++){
         imagenes2[i].removeAttribute("style","opacity");
     }
-    var eleccionJugador = document.getElementById("eleccionJugador");
-    var eleccionOponente = document.getElementById("eleccionOponente");
-
+    
+    
     eleccionJugador.setAttribute("src"," ");
     eleccionOponente.setAttribute("src"," ");
-
-    //var historyButton = ;
-    
 }
 
 function SaveMatch(){
