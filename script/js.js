@@ -1,4 +1,4 @@
-const tabla = 
+const table = 
 {   "piedra":   ["tijeras","lagarto"],
     "papel":    ["piedra","spock"],
     "tijeras":  ["papel","lagarto"],
@@ -6,34 +6,34 @@ const tabla =
     "spock":    ["piedra","tijeras"] 
 };
 let firstTime = true;
-let nombre;
+let player;
 let historyGames;
 
 let choicePlayer, choiceOpponent;
 let scorePlayer, scoreOpponent;
 let gameResult;
 
-function jugar() {
-    if (validar()) {
+function play() {
+    if (validate()) {
         let main = document.querySelector("main");               
 
         main.style.pointerEvents="auto";
         main.style.opacity=1;                
         
-        document.querySelector("html").style.setProperty("--jugador", document.getElementById("colorPlayer").value);
-        document.querySelector("html").style.setProperty("--oponente", document.getElementById("colorOpponent").value);
+        document.querySelector("html").style.setProperty("--player", document.getElementById("colorPlayer").value);
+        document.querySelector("html").style.setProperty("--opponent", document.getElementById("colorOpponent").value);
 
-        document.getElementById("nombreJugador").textContent = nombre.value;
+        document.getElementById("namePlayer").textContent = player.value;
         
         if(firstTime) firstTime = false;            
-        else saveMatch(nombre.value);
+        else saveMatch(player.value);
         
         reset();        
     }
 }
 
 function reset() {    
-    nombre.value="";
+    player.value="";
 
     scorePlayer.textContent = 0;
     scoreOpponent.textContent = 0;
@@ -46,7 +46,7 @@ function reset() {
     choiceOpponent.setAttribute("src"," ");
 }
 
-function eleccionJugador(img){
+function choicingPlayer(img){
 
     imagesRemoveAttributes();
     
@@ -54,18 +54,18 @@ function eleccionJugador(img){
 
     img.setAttribute("style","opacity:1");
     
-    resultado(img, eleccionOponente());
-    contador();
+    result(img, choicingOpponent());
+    counter();
 }
 
-function eleccionOponente(){    
-    let opciones = ["piedra","papel","tijeras","lagarto","spock"];
-    let eleccion = opciones[getRandomInt(0,5)];    
+function choicingOpponent(){    
+    let options = ["piedra","papel","tijeras","lagarto","spock"];
+    let choice = options[getRandomInt(0,5)];    
 
-    choiceOpponent.src = document.getElementById(eleccion).src;
-    document.getElementById(eleccion+"Op").style.opacity = "1";
+    choiceOpponent.src = document.getElementById(choice).src;
+    document.getElementById(choice+"Op").style.opacity = "1";
     
-    return eleccion;
+    return choice;
 }
 
 function getRandomInt(min, max) {
@@ -74,40 +74,40 @@ function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min) + min);
 }
 
-function resultado(img, eleccionOponente){
-    if (eleccionOponente === img.id) 
+function result(img, choiceOpponent){
+    if (choiceOpponent === img.id) 
         gameResult.textContent = "empate";
-     else if (tabla[img.id].includes(eleccionOponente))
+     else if (table[img.id].includes(choiceOpponent))
         gameResult.textContent = "ganaste";
      else 
         gameResult.textContent = "perdiste";
 
-    contador(gameResult.textContent);
+    counter(gameResult.textContent);
 }
 
-function contador(resultado) {
-    if (resultado == "ganaste")
+function counter(gameResult) {
+    if (gameResult == "ganaste")
         scorePlayer.textContent = parseInt(scorePlayer.textContent) + 1;
-    else if (resultado == "perdiste")
+    else if (gameResult == "perdiste")
         scoreOpponent.textContent = parseInt(scoreOpponent.textContent) + 1;
 }
 
-function validar() {
-    if (nombre.value.trim() == ''){
+function validate() {
+    if (player.value.trim() == ''){
         alert("El nombre es obligatorio");
         return false;
     } else return true;
 }
 
 function imagesRemoveAttributes(){
-    let imagenes = document.getElementsByClassName("select__image");
-    let imagenes2 = document.getElementsByClassName("select__image2");    
+    let images = document.getElementsByClassName("select__image");
+    let images2 = document.getElementsByClassName("select__image2");    
 
-    for(let i=0; i<imagenes.length; i++){
-        imagenes[i].removeAttribute("style","opacity");
+    for(let i=0; i<images.length; i++){
+        images[i].removeAttribute("style","opacity");
     }
-    for(let i=0; i<imagenes2.length; i++){
-        imagenes2[i].removeAttribute("style","opacity");
+    for(let i=0; i<images2.length; i++){
+        images2[i].removeAttribute("style","opacity");
     }
 }
 
@@ -134,16 +134,16 @@ window.onload = function(){
 }
 
 function init(){
-    document.getElementById("bPlay").addEventListener("click", jugar);
+    document.getElementById("bPlay").addEventListener("click", play);
     document.getElementById("bHistory").addEventListener("click", showMatch);
 
-    nombre = document.getElementById("nombre");
+    player = document.getElementById("player");
 
-    scorePlayer = document.getElementById("puntuacionJugador");
-    scoreOpponent = document.getElementById("puntuacionOponente");
-    choicePlayer = document.getElementById("eleccionJugador");
-    choiceOpponent = document.getElementById("eleccionOponente");
-    gameResult = document.getElementById("resultado");
+    scorePlayer = document.getElementById("scorePlayer");
+    scoreOpponent = document.getElementById("scoreOpponent");
+    choicePlayer = document.getElementById("choicePlayer");
+    choiceOpponent = document.getElementById("choiceOpponent");
+    gameResult = document.getElementById("gameResult");
 }
 
 //-------------------------------------
