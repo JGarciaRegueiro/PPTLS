@@ -10,22 +10,22 @@
     </head>
     <body>
         <header>
-            <input type="text" id="nombre" placeholder="Introduce tu nombre">
+            <input type="text" id="player" placeholder="Introduce tu nombre">
             <input id="bPlay"  type="submit" value="Jugar!">
             <label for="colorPlayer">Color Jugador</label><input id="colorPlayer" class="colors" type="color" value="#ffd454">
             <label for="colorOpponent">Color Oponente</label><input id="colorOpponent" class="colors" type="color" value="#f17b7b">
             <input id="bHistory" type="submit" value="Games history!"></input>    
         </header>
         <main>
-            <section class="estadisticas">
+            <section class="stats">
                 <div>
                     <h1>Jugador</h1>
-                    <p id="nombreJugador">Jugador1</p>   
+                    <p id="namePlayer">Jugador1</p>   
                 </div>
-                <div class="contador">
-                    <span id="puntuacionJugador">0</span>
+                <div class="counter">
+                    <span id="scorePlayer">0</span>
                     <span>-</span>
-                    <span id="puntuacionOponente">0</span>
+                    <span id="scoreOpponent">0</span>
                 </div>
                 <div>
                     <h1>Oponente</h1>
@@ -33,7 +33,7 @@
                 </div>
             </section>
             <section class="match">
-                <div class="selectorJugador">
+                <div class="selectorPlayer">
                     <img  id="piedra" class="select__image" src="img/piedra.png" alt="Icono piedra">
                     <img  id="papel" class="select__image" src="img/papel.png" alt="Icono papel">
                     <img  id="tijeras" class="select__image" src="img/tijeras.png" alt="Icono tijeras">
@@ -41,11 +41,11 @@
                     <img  id="spock" class="select__image" src="img/spock.png" alt="Icono spock">
                 </div>
                 <div class="decisionFinal">
-                    <img id="eleccionJugador">
+                    <img id="choicePlayer">
                     <img class="versus" src="img/versus.png" alt="versus">
-                    <img id="eleccionOponente">    
+                    <img id="choiceOpponent">    
                 </div>
-                <div class="selectorOponente">
+                <div class="selectorOpponent">
                     <img id="piedraOp" class="select__image2" src="img/piedra.png" alt="Icono piedra">
                     <img id="papelOp" class="select__image2" src="img/papel.png" alt="Icono papel">
                     <img id="tijerasOp" class="select__image2" src="img/tijeras.png" alt="Icono tijeras">
@@ -53,8 +53,8 @@
                     <img id="spockOp" class="select__image2" src="img/spock.png" alt="Icono spock">
                 </div>                
             </section>
-            <section class="resultado">
-                <h1 id="resultado"></h1>
+            <section class="gameResult">
+                <h1 id="gameResult"></h1>
             </section>
         </main>
         <footer>    

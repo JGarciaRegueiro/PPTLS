@@ -1,4 +1,4 @@
-const GAME_TABLE = 
+const TABLE = 
 {   "piedra":   ["tijeras","lagarto"],
     "papel":    ["piedra","spock"],
     "tijeras":  ["papel","lagarto"],
@@ -6,7 +6,7 @@ const GAME_TABLE =
     "spock":    ["piedra","tijeras"] 
 };
 let firstTime = true;
-let currentName;
+let player;
 let historyGames;
 
 let choicePlayer, choiceOpponent;
@@ -20,23 +20,23 @@ window.onload = function(){
     setEventListeners();
 }
 function init(){
-    currentName = document.getElementById("nombre");
+    player = document.getElementById("player");
 
-    scorePlayer = document.getElementById("puntuacionJugador");
-    scoreOpponent = document.getElementById("puntuacionOponente");
-    choicePlayer = document.getElementById("eleccionJugador");
-    choiceOpponent = document.getElementById("eleccionOponente");
-    gameResult = document.getElementById("resultado");
+    scorePlayer = document.getElementById("scorePlayer");
+    scoreOpponent = document.getElementById("scoreOpponent");
+    choicePlayer = document.getElementById("choicePlayer");
+    choiceOpponent = document.getElementById("choiceOpponent");
+    gameResult = document.getElementById("gameResult");
 }
 function setEventListeners(){
     document.getElementById("bPlay").addEventListener("click", play);
     document.getElementById("bHistory").addEventListener("click", showMatch);
 
-    document.getElementById("piedra").addEventListener("click", (ev) => electionPlayer(ev.target));
-    document.getElementById("papel").addEventListener("click", (ev) => electionPlayer(ev.target));
-    document.getElementById("tijeras").addEventListener("click", (ev) => electionPlayer(ev.target));
-    document.getElementById("lagarto").addEventListener("click", (ev) => electionPlayer(ev.target));
-    document.getElementById("spock").addEventListener("click", (ev) => electionPlayer(ev.target));
+    document.getElementById("piedra").addEventListener("click", (ev) => choicingPlayer(ev.target));
+    document.getElementById("papel").addEventListener("click", (ev) => choicingPlayer(ev.target));
+    document.getElementById("tijeras").addEventListener("click", (ev) => choicingPlayer(ev.target));
+    document.getElementById("lagarto").addEventListener("click", (ev) => choicingPlayer(ev.target));
+    document.getElementById("spock").addEventListener("click", (ev) => choicingPlayer(ev.target));
 }
 
 function play() {
@@ -46,25 +46,25 @@ function play() {
         main.style.pointerEvents="auto";
         main.style.opacity=1;                
         
-        document.querySelector("html").style.setProperty("--jugador", document.getElementById("colorPlayer").value);
-        document.querySelector("html").style.setProperty("--oponente", document.getElementById("colorOpponent").value);
+        document.querySelector("html").style.setProperty("--player", document.getElementById("colorPlayer").value);
+        document.querySelector("html").style.setProperty("--opponent", document.getElementById("colorOpponent").value);
 
-        document.getElementById("nombreJugador").textContent = currentName.value;
+        document.getElementById("namePlayer").textContent = player.value;
         
         if(firstTime) firstTime = false;            
-        else saveMatch(currentName.value);
+        else saveMatch(player.value);
         
         reset();        
     }
 }
 function validate() {
-    if (currentName.value.trim() == ''){
+    if (player.value.trim() == ''){
         alert("El nombre es obligatorio");
         return false;
     } else return true;
 }
 function reset() {    
-    currentName.value="";
+    player.value="";
 
     scorePlayer.textContent = 0;
     scoreOpponent.textContent = 0;
@@ -80,20 +80,20 @@ function reset() {
 function result(img, electionOpponent){
     if (electionOpponent === img.id) 
         gameResult.textContent = "empate";
-     else if (GAME_TABLE[img.id].includes(electionOpponent))
+     else if (TABLE[img.id].includes(electionOpponent))
         gameResult.textContent = "ganaste";
      else 
         gameResult.textContent = "perdiste";
 
-    cont(gameResult.textContent);
+    counter(gameResult.textContent);
 }
-function cont(result) {
+function counter(result) {
     if (result == "ganaste")
         scorePlayer.textContent = parseInt(scorePlayer.textContent) + 1;
     else if (result == "perdiste")
         scoreOpponent.textContent = parseInt(scoreOpponent.textContent) + 1;
 }
-function electionPlayer(img){
+function choicingPlayer(img){
 
     imagesRemoveAttributes();
     
@@ -101,17 +101,18 @@ function electionPlayer(img){
 
     img.setAttribute("style","opacity:1");
     
-    result(img, electionOpponent());
-    cont();
+    result(img, choicingOpponent());
+    counter();
 }
-function electionOpponent(){    
-    let opciones = ["piedra","papel","tijeras","lagarto","spock"];
-    let eleccion = opciones[getRandomInt(0,5)];    
 
-    choiceOpponent.src = document.getElementById(eleccion).src;
-    document.getElementById(eleccion+"Op").style.opacity = "1";
+function choicingOpponent(){    
+    let options = ["piedra","papel","tijeras","lagarto","spock"];
+    let choice = options[getRandomInt(0,5)];    
+
+    choiceOpponent.src = document.getElementById(choice).src;
+    document.getElementById(choice+"Op").style.opacity = "1";
     
-    return eleccion;
+    return choice;
 }
 
 function saveMatch(){
@@ -135,13 +136,13 @@ function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min) + min);
 }
 function imagesRemoveAttributes(){
-    let imagenes = document.getElementsByClassName("select__image");
-    let imagenes2 = document.getElementsByClassName("select__image2");    
+    let images = document.getElementsByClassName("select__image");
+    let images2 = document.getElementsByClassName("select__image2");    
 
-    for(let i=0; i<imagenes.length; i++){
-        imagenes[i].removeAttribute("style","opacity");
+    for(let i=0; i<images.length; i++){
+        images[i].removeAttribute("style","opacity");
     }
-    for(let i=0; i<imagenes2.length; i++){
-        imagenes2[i].removeAttribute("style","opacity");
-    }
+    for(let i=0; i<images2.length; i++){
+        images2[i].removeAttribute("style","opacity");
+    }    
 }

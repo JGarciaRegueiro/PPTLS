@@ -1,6 +1,6 @@
 :root {
-    --oponente: #f17b7b;
-    --jugador: #ffd454;
+    --opponent: #f17b7b;
+    --player: #ffd454;
     --fondo: #87ebf7;
     font-family: 'Krub', sans-serif;
 }
@@ -36,11 +36,11 @@ img {
 }
 
 .select__image {
-    background-color: var(--jugador);
+    background-color: var(--player);
 }
 
 .select__image2 {
-    background-color: var(--oponente);
+    background-color: var(--opponent);
 }
 
 .select__image:hover {
@@ -65,17 +65,17 @@ header input {
     padding: 2px;
 }
 
-.estadisticas {
+.stats {
     display: flex;
     justify-content: space-evenly;
     align-items: center;
 }
 
-.estadisticas div {
+.stats div {
     text-align: center;
 }
 
-.contador {
+.counter {
     font-size: 100px;
 }
 
@@ -91,13 +91,13 @@ header input {
     margin: 40px;
 }
 
-.selectorJugador, .selectorOponente {
+.selectorPlayer, .selectorOpponent {
     display: flex;
     flex-direction: column;
     gap: 5px;
 }
 
-#eleccionJugador, #eleccionOponente {
+#choicePlayer, #choiceOpponent {
     height: 300px;
     width: 300px;
     opacity: 1;
@@ -108,14 +108,14 @@ header input {
     align-items: center;
 }
 
-.resultado {
+.gameResult {
     display: flex;
     flex-direction: column;
     align-items: center;
     font-size: 30px;
 }
 
-#resultado {
+#gameResult {
     text-transform: uppercase;
 }
 
@@ -134,7 +134,7 @@ footer {
         flex-direction: column;
    } 
 
-   .selectorJugador, .selectorOponente {
+   .selectorPlayer, .selectorOpponent {
         flex-direction: row;
     }
 
@@ -144,12 +144,12 @@ footer {
         border: 2px solid;
     }
 
-    #eleccionJugador, #eleccionOponente {
+    #choicePlayer, #choiceOpponent {
         height: 100px;
         width: 100px;
     }
 
-    .contador {
+    .counter {
         font-size: 20px;
     }
 
