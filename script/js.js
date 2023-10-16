@@ -1,4 +1,4 @@
-const tabla = 
+const GAME_TABLE = 
 {   "piedra":   ["tijeras","lagarto"],
     "papel":    ["piedra","spock"],
     "tijeras":  ["papel","lagarto"],
@@ -6,15 +6,41 @@ const tabla =
     "spock":    ["piedra","tijeras"] 
 };
 let firstTime = true;
-let nombre;
+let currentName;
 let historyGames;
 
 let choicePlayer, choiceOpponent;
 let scorePlayer, scoreOpponent;
 let gameResult;
 
-function jugar() {
-    if (validar()) {
+window.onload = function(){    
+    historyGames = [];
+    
+    init();
+    setEventListeners();
+}
+function init(){
+    currentName = document.getElementById("nombre");
+
+    scorePlayer = document.getElementById("puntuacionJugador");
+    scoreOpponent = document.getElementById("puntuacionOponente");
+    choicePlayer = document.getElementById("eleccionJugador");
+    choiceOpponent = document.getElementById("eleccionOponente");
+    gameResult = document.getElementById("resultado");
+}
+function setEventListeners(){
+    document.getElementById("bPlay").addEventListener("click", play);
+    document.getElementById("bHistory").addEventListener("click", showMatch);
+
+    document.getElementById("piedra").addEventListener("click", (ev) => electionPlayer(ev.target));
+    document.getElementById("papel").addEventListener("click", (ev) => electionPlayer(ev.target));
+    document.getElementById("tijeras").addEventListener("click", (ev) => electionPlayer(ev.target));
+    document.getElementById("lagarto").addEventListener("click", (ev) => electionPlayer(ev.target));
+    document.getElementById("spock").addEventListener("click", (ev) => electionPlayer(ev.target));
+}
+
+function play() {
+    if (validate()) {
         let main = document.querySelector("main");               
 
         main.style.pointerEvents="auto";
@@ -23,17 +49,22 @@ function jugar() {
         document.querySelector("html").style.setProperty("--jugador", document.getElementById("colorPlayer").value);
         document.querySelector("html").style.setProperty("--oponente", document.getElementById("colorOpponent").value);
 
-        document.getElementById("nombreJugador").textContent = nombre.value;
+        document.getElementById("nombreJugador").textContent = currentName.value;
         
         if(firstTime) firstTime = false;            
-        else saveMatch(nombre.value);
+        else saveMatch(currentName.value);
         
         reset();        
     }
 }
-
+function validate() {
+    if (currentName.value.trim() == ''){
+        alert("El nombre es obligatorio");
+        return false;
+    } else return true;
+}
 function reset() {    
-    nombre.value="";
+    currentName.value="";
 
     scorePlayer.textContent = 0;
     scoreOpponent.textContent = 0;
@@ -46,7 +77,23 @@ function reset() {
     choiceOpponent.setAttribute("src"," ");
 }
 
-function eleccionJugador(img){
+function result(img, electionOpponent){
+    if (electionOpponent === img.id) 
+        gameResult.textContent = "empate";
+     else if (GAME_TABLE[img.id].includes(electionOpponent))
+        gameResult.textContent = "ganaste";
+     else 
+        gameResult.textContent = "perdiste";
+
+    cont(gameResult.textContent);
+}
+function cont(result) {
+    if (result == "ganaste")
+        scorePlayer.textContent = parseInt(scorePlayer.textContent) + 1;
+    else if (result == "perdiste")
+        scoreOpponent.textContent = parseInt(scoreOpponent.textContent) + 1;
+}
+function electionPlayer(img){
 
     imagesRemoveAttributes();
     
@@ -54,11 +101,10 @@ function eleccionJugador(img){
 
     img.setAttribute("style","opacity:1");
     
-    resultado(img, eleccionOponente());
-    contador();
+    result(img, electionOpponent());
+    cont();
 }
-
-function eleccionOponente(){    
+function electionOpponent(){    
     let opciones = ["piedra","papel","tijeras","lagarto","spock"];
     let eleccion = opciones[getRandomInt(0,5)];    
 
@@ -68,53 +114,9 @@ function eleccionOponente(){
     return eleccion;
 }
 
-function getRandomInt(min, max) {
-    min = Math.ceil(min);
-    max = Math.floor(max);
-    return Math.floor(Math.random() * (max - min) + min);
-}
-
-function resultado(img, eleccionOponente){
-    if (eleccionOponente === img.id) 
-        gameResult.textContent = "empate";
-     else if (tabla[img.id].includes(eleccionOponente))
-        gameResult.textContent = "ganaste";
-     else 
-        gameResult.textContent = "perdiste";
-
-    contador(gameResult.textContent);
-}
-
-function contador(resultado) {
-    if (resultado == "ganaste")
-        scorePlayer.textContent = parseInt(scorePlayer.textContent) + 1;
-    else if (resultado == "perdiste")
-        scoreOpponent.textContent = parseInt(scoreOpponent.textContent) + 1;
-}
-
-function validar() {
-    if (nombre.value.trim() == ''){
-        alert("El nombre es obligatorio");
-        return false;
-    } else return true;
-}
-
-function imagesRemoveAttributes(){
-    let imagenes = document.getElementsByClassName("select__image");
-    let imagenes2 = document.getElementsByClassName("select__image2");    
-
-    for(let i=0; i<imagenes.length; i++){
-        imagenes[i].removeAttribute("style","opacity");
-    }
-    for(let i=0; i<imagenes2.length; i++){
-        imagenes2[i].removeAttribute("style","opacity");
-    }
-}
-
 function saveMatch(){
     historyGames.push(scorePlayer.textContent + " vs " + scoreOpponent.textContent);
 }
-
 function showMatch(){
     if(!firstTime) {        
         let str = "Games";
@@ -127,24 +129,19 @@ function showMatch(){
     }
 }
 
-window.onload = function(){    
-    historyGames = [];
-    
-    init();
+function getRandomInt(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min) + min);
 }
+function imagesRemoveAttributes(){
+    let imagenes = document.getElementsByClassName("select__image");
+    let imagenes2 = document.getElementsByClassName("select__image2");    
 
-function init(){
-    document.getElementById("bPlay").addEventListener("click", jugar);
-    document.getElementById("bHistory").addEventListener("click", showMatch);
-
-    nombre = document.getElementById("nombre");
-
-    scorePlayer = document.getElementById("puntuacionJugador");
-    scoreOpponent = document.getElementById("puntuacionOponente");
-    choicePlayer = document.getElementById("eleccionJugador");
-    choiceOpponent = document.getElementById("eleccionOponente");
-    gameResult = document.getElementById("resultado");
+    for(let i=0; i<imagenes.length; i++){
+        imagenes[i].removeAttribute("style","opacity");
+    }
+    for(let i=0; i<imagenes2.length; i++){
+        imagenes2[i].removeAttribute("style","opacity");
+    }
 }
-
-//-------------------------------------
-
