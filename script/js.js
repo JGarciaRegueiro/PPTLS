@@ -1,4 +1,4 @@
-const table = 
+const TABLE = 
 {   "piedra":   ["tijeras","lagarto"],
     "papel":    ["piedra","spock"],
     "tijeras":  ["papel","lagarto"],
@@ -12,6 +12,32 @@ let historyGames;
 let choicePlayer, choiceOpponent;
 let scorePlayer, scoreOpponent;
 let gameResult;
+
+window.onload = function(){    
+    historyGames = [];
+    
+    init();
+    setEventListeners();
+}
+function init(){
+    player = document.getElementById("player");
+
+    scorePlayer = document.getElementById("scorePlayer");
+    scoreOpponent = document.getElementById("scoreOpponent");
+    choicePlayer = document.getElementById("choicePlayer");
+    choiceOpponent = document.getElementById("choiceOpponent");
+    gameResult = document.getElementById("gameResult");
+}
+function setEventListeners(){
+    document.getElementById("bPlay").addEventListener("click", play);
+    document.getElementById("bHistory").addEventListener("click", showMatch);
+
+    document.getElementById("piedra").addEventListener("click", (ev) => choicingPlayer(ev.target));
+    document.getElementById("papel").addEventListener("click", (ev) => choicingPlayer(ev.target));
+    document.getElementById("tijeras").addEventListener("click", (ev) => choicingPlayer(ev.target));
+    document.getElementById("lagarto").addEventListener("click", (ev) => choicingPlayer(ev.target));
+    document.getElementById("spock").addEventListener("click", (ev) => choicingPlayer(ev.target));
+}
 
 function play() {
     if (validate()) {
@@ -31,7 +57,12 @@ function play() {
         reset();        
     }
 }
-
+function validate() {
+    if (player.value.trim() == ''){
+        alert("El nombre es obligatorio");
+        return false;
+    } else return true;
+}
 function reset() {    
     player.value="";
 
@@ -46,6 +77,22 @@ function reset() {
     choiceOpponent.setAttribute("src"," ");
 }
 
+function result(img, electionOpponent){
+    if (electionOpponent === img.id) 
+        gameResult.textContent = "empate";
+     else if (TABLE[img.id].includes(electionOpponent))
+        gameResult.textContent = "ganaste";
+     else 
+        gameResult.textContent = "perdiste";
+
+    counter(gameResult.textContent);
+}
+function counter(result) {
+    if (result == "ganaste")
+        scorePlayer.textContent = parseInt(scorePlayer.textContent) + 1;
+    else if (result == "perdiste")
+        scoreOpponent.textContent = parseInt(scoreOpponent.textContent) + 1;
+}
 function choicingPlayer(img){
 
     imagesRemoveAttributes();
@@ -68,53 +115,9 @@ function choicingOpponent(){
     return choice;
 }
 
-function getRandomInt(min, max) {
-    min = Math.ceil(min);
-    max = Math.floor(max);
-    return Math.floor(Math.random() * (max - min) + min);
-}
-
-function result(img, choiceOpponent){
-    if (choiceOpponent === img.id) 
-        gameResult.textContent = "empate";
-     else if (table[img.id].includes(choiceOpponent))
-        gameResult.textContent = "ganaste";
-     else 
-        gameResult.textContent = "perdiste";
-
-    counter(gameResult.textContent);
-}
-
-function counter(gameResult) {
-    if (gameResult == "ganaste")
-        scorePlayer.textContent = parseInt(scorePlayer.textContent) + 1;
-    else if (gameResult == "perdiste")
-        scoreOpponent.textContent = parseInt(scoreOpponent.textContent) + 1;
-}
-
-function validate() {
-    if (player.value.trim() == ''){
-        alert("El nombre es obligatorio");
-        return false;
-    } else return true;
-}
-
-function imagesRemoveAttributes(){
-    let images = document.getElementsByClassName("select__image");
-    let images2 = document.getElementsByClassName("select__image2");    
-
-    for(let i=0; i<images.length; i++){
-        images[i].removeAttribute("style","opacity");
-    }
-    for(let i=0; i<images2.length; i++){
-        images2[i].removeAttribute("style","opacity");
-    }
-}
-
 function saveMatch(){
     historyGames.push(scorePlayer.textContent + " vs " + scoreOpponent.textContent);
 }
-
 function showMatch(){
     if(!firstTime) {        
         let str = "Games";
@@ -127,24 +130,19 @@ function showMatch(){
     }
 }
 
-window.onload = function(){    
-    historyGames = [];
-    
-    init();
+function getRandomInt(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min) + min);
 }
+function imagesRemoveAttributes(){
+    let images = document.getElementsByClassName("select__image");
+    let images2 = document.getElementsByClassName("select__image2");    
 
-function init(){
-    document.getElementById("bPlay").addEventListener("click", play);
-    document.getElementById("bHistory").addEventListener("click", showMatch);
-
-    player = document.getElementById("player");
-
-    scorePlayer = document.getElementById("scorePlayer");
-    scoreOpponent = document.getElementById("scoreOpponent");
-    choicePlayer = document.getElementById("choicePlayer");
-    choiceOpponent = document.getElementById("choiceOpponent");
-    gameResult = document.getElementById("gameResult");
+    for(let i=0; i<images.length; i++){
+        images[i].removeAttribute("style","opacity");
+    }
+    for(let i=0; i<images2.length; i++){
+        images2[i].removeAttribute("style","opacity");
+    }    
 }
-
-//-------------------------------------
-
